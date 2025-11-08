@@ -1,0 +1,29 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="ListBox Работа с людьми" Height="550" Width="800">
+    <StackPanel>
+        <Label Content="Работа с ListBox" HorizontalAlignment="Center" FontSize="28"></Label>
+
+        <Label x:Name="SelectName"
+               Content="Вы пока не выбрали имя"
+               FontSize="20"
+               HorizontalAlignment="Center"></Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="50">
+            <ListBox x:Name="UsersLB" Width="400" Height="250" Background="#FFF5F1F1" FontSize="20" SelectionChanged="SelecteName" ></ListBox>
+            <Button Content=">"  Width="25" Height="25" Click="MoveSelected"></Button>
+            <ListBox x:Name="UsersLB2" Width="400" Height="250" Background="#FFF5F1F1" FontSize="20" SelectionChanged="SelecteName" ></ListBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+            <TextBox Width="150" Height="25" Margin="5" x:Name="NameTB"></TextBox>
+            <Button Width="150" Height="25" Content="Добавить новое имя" Click="AddNewUser"></Button>
+        </StackPanel>
+
+        <Button Width="250" Height="25" Content="Удалить выбранный элемент" Click="DeleteUser"></Button>
+    </StackPanel>
+</Window>
