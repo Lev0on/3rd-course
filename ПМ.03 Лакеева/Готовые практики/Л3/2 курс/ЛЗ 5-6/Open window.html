@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЛЗ 5 </title>
+</head>
+<body>
+    <form name="form14">
+        Введите число <input type="text" name="t1" size="10">
+        <br>
+        <br>
+        <input type="button" name="button" value="Вычислить" onclick="areaRectangle();">
+        <br>
+        <br>
+        <input type="text" name="res" size="10">
+    </form>
+    <script>
+        function areaRectangle() {
+    let a = document.form14.t1.value;
+    let res = Math.sqrt(a);
+    document.form14.res.value=res;
+}
+    </script>
+</body>
+</html>
