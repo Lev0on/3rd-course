@@ -1,0 +1,7 @@
+C:\Users\лева\Desktop\Praktika3\Praktika3\bin\Debug\Praktika3.exe.config
+C:\Users\лева\Desktop\Praktika3\Praktika3\bin\Debug\Praktika3.exe
+C:\Users\лева\Desktop\Praktika3\Praktika3\bin\Debug\Praktika3.pdb
+C:\Users\лева\Desktop\Praktika3\Praktika3\obj\Debug\Praktika3.csproj.AssemblyReference.cache
+C:\Users\лева\Desktop\Praktika3\Praktika3\obj\Debug\Praktika3.csproj.CoreCompileInputs.cache
+C:\Users\лева\Desktop\Praktika3\Praktika3\obj\Debug\Praktika3.exe
+C:\Users\лева\Desktop\Praktika3\Praktika3\obj\Debug\Praktika3.pdb

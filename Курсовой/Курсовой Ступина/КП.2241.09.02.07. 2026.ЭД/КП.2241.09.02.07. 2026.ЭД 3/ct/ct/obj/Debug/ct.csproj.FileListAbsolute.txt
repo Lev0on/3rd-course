@@ -1,0 +1,64 @@
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\ct.exe.config
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\ct.exe
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\ct.pdb
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\EntityFramework.dll
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\EntityFramework.xml
+C:\Users\Лева\source\repos\ct\ct\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.csproj.AssemblyReference.cache
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\LoginWindow.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\MainWindow.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\App.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct_Content.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct_MarkupCompile.cache
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct_MarkupCompile.lref
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\LoginWindow.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\MainWindow.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.g.resources
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.Properties.Resources.resources
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.csproj.GenerateResource.cache
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.csproj.CoreCompileInputs.cache
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.csproj.Up2Date
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.exe
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ct.pdb
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\TestsPage.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\TestsPage.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ResultPage.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\UsersPage.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\ResultPage.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\UsersPage.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\EditUserWindow.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\EditUserWindow.baml
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\TestTakingPage.g.cs
+C:\Users\Лева\source\repos\ct\ct\obj\Debug\TestTakingPage.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\ct.exe.config
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\ct.exe
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\ct.pdb
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\EntityFramework.dll
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\EntityFramework.xml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\bin\Debug\ru\EntityFramework.resources.dll
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.csproj.AssemblyReference.cache
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\EditUserWindow.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\LoginWindow.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\MainWindow.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ResultPage.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\TestsPage.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\TestTakingPage.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\UsersPage.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\App.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct_Content.g.cs
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct_MarkupCompile.cache
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct_MarkupCompile.lref
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\EditUserWindow.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\LoginWindow.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\MainWindow.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ResultPage.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\TestsPage.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\TestTakingPage.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\UsersPage.baml
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.g.resources
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.Properties.Resources.resources
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.csproj.GenerateResource.cache
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.csproj.CoreCompileInputs.cache
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.csproj.Up2Date
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.exe
+C:\Users\Лева\Documents\КП.2241.09.02.07. 2026.ЭД\КП.2241.09.02.07. 2026.ЭД 3\ct\ct\obj\Debug\ct.pdb

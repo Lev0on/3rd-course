@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="response" style="font: 1.5em sans-serif"></p>
+
+    <script>
+        (function() {
+            const info = document.getElementById('response')
+
+            window.alert('Приветсвие студентам ГПБОУ "ИЭК"')
+
+            info.innerHTML = 'Confirm: ' +
+                window.confirm('Ок или отмена')
+
+            info.innerHTML = '<br>Promt: ' +
+                window.prompt('Да или нет?', 'Да')
+
+        })()
+    </script>
+</body>
+
+</html>

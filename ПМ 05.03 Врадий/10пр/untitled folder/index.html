@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List с тестами</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .app-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            border-color: #667eea;
+        }
+        
+        #add-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        
+        #add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        #add-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        ul {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        li {
+            background: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            border-left: 4px solid #667eea;
+        }
+        
+        li:hover {
+            background: #f0f1f3;
+            transform: translateX(5px);
+        }
+        
+        li.checked {
+            background: #e8e8e8;
+            text-decoration: line-through;
+            color: #999;
+            border-left-color: #28a745;
+        }
+        
+        .delete-btn {
+            background: #ff6b6b;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        
+        .delete-btn:hover {
+            background: #ee5a5a;
+            transform: scale(1.1);
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+        
+        #task-count {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        #clear-all {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        #clear-all:hover {
+            background: #ee5a5a;
+        }
+        /* Панель тестов */
+        
+        .test-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: fit-content;
+        }
+        
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .test-header h2 {
+            color: #333;
+            font-size: 22px;
+        }
+        
+        .test-controls {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .run-btn,
+        .clear-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .run-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+        
+        .run-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .run-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .clear-btn {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .clear-btn:hover {
+            background: #5a6268;
+        }
+        
+        .test-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .summary-item .label {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .summary-item .value {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .summary-item .value.passed {
+            color: #28a745;
+        }
+        
+        .summary-item .value.failed {
+            color: #dc3545;
+        }
+        
+        .test-results {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .test-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #ccc;
+            background: #f8f9fa;
+        }
+        
+        .test-item.passed {
+            border-left-color: #28a745;
+            background: #d4edda;
+        }
+        
+        .test-item.failed {
+            border-left-color: #dc3545;
+            background: #f8d7da;
+        }
+        
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+        
+        .test-icon {
+            font-size: 18px;
+        }
+        
+        .test-name {
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .test-time {
+            font-size: 12px;
+            color: #666;
+            margin-left: 10px;
+        }
+        
+        .test-error {
+            width: 100%;
+            margin-top: 8px;
+            padding: 8px;
+            background: #f5c6cb;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #721c24;
+        }
+        
+         ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+         ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+         ::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+        
+         ::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Приложение -->
+        <div class="app-container">
+            <div class="container">
+                <h1>📝 Список задач</h1>
+                <div class="input-group">
+                    <input type="text" id="input-box" placeholder="Что нужно сделать?">
+                    <button id="add-btn">Добавить</button>
+                </div>
+                <ul id="list-container"></ul>
+                <div class="stats">
+                    <span id="task-count">Задач: 0</span>
+                    <button id="clear-all">Очистить всё</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель тестов -->
+        <div class="test-panel">
+            <div class="test-header">
+                <h2>🧪 Unit Тесты</h2>
+                <div class="test-controls">
+                    <button id="run-tests" class="run-btn">▶ Запустить тесты</button>
+                    <button id="clear-tests" class="clear-btn">🗑 Очистить</button>
+                </div>
+            </div>
+
+            <div class="test-summary">
+                <div class="summary-item">
+                    <span class="label">Всего:</span>
+                    <span id="total-tests" class="value">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">✅ Пройдено:</span>
+                    <span id="passed-tests" class="value passed">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">❌ Провалено:</span>
+                    <span id="failed-tests" class="value failed">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">⏱ Время:</span>
+                    <span id="test-time" class="value">0ms</span>
+                </div>
+            </div>
+
+            <div id="test-results" class="test-results">
+                <div class="empty-state">
+                    <p>Нажмите "Запустить тесты" для проверки</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== TODO APP ====================
+        class TodoApp {
+            constructor(inputBox, listContainer, taskCountSpan, storageKey = 'todoData') {
+                this.inputBox = inputBox;
+                this.listContainer = listContainer;
+                this.taskCountSpan = taskCountSpan;
+                this.storageKey = storageKey;
+            }
+
+            addTask() {
+                const text = this.inputBox.value.trim();
+                if (text === '') {
+                    return false;
+                }
+
+                const li = document.createElement("li");
+                li.textContent = text;
+
+                const span = document.createElement("button");
+                span.innerHTML = "\u00d7";
+                span.className = "delete-btn";
+                li.appendChild(span);
+
+                this.listContainer.appendChild(li);
+                this.inputBox.value = "";
+                this.saveData();
+                this.updateStats();
+                return true;
+            }
+
+            handleListClick(e) {
+                if (e.target.tagName === "LI") {
+                    e.target.classList.toggle("checked");
+                    this.saveData();
+                    this.updateStats();
+                    return true;
+                } else if (e.target.className === "delete-btn") {
+                    e.target.parentElement.remove();
+                    this.saveData();
+                    this.updateStats();
+                    return true;
+                }
+                return false;
+            }
+
+            saveData() {
+                try {
+                    localStorage.setItem(this.storageKey, this.listContainer.innerHTML);
+                } catch (e) {
+                    console.warn('LocalStorage недоступен');
+                }
+            }
+
+            loadData() {
+                try {
+                    const data = localStorage.getItem(this.storageKey);
+                    if (data) {
+                        this.listContainer.innerHTML = data;
+                        this.updateStats();
+                    }
+                } catch (e) {
+                    console.warn('LocalStorage недоступен');
+                }
+            }
+
+            updateStats() {
+                if (this.taskCountSpan) {
+                    const count = this.listContainer.children.length;
+                    const completed = Array.from(this.listContainer.children)
+                        .filter(li => li.classList.contains('checked')).length;
+                    this.taskCountSpan.textContent = `Задач: ${count} | Выполнено: ${completed}`;
+                }
+            }
+
+            getTaskCount() {
+                return this.listContainer.children.length;
+            }
+
+            getTasks() {
+                return Array.from(this.listContainer.children).map(li => ({
+                    text: li.textContent.replace('×', '').trim(),
+                    completed: li.classList.contains('checked')
+                }));
+            }
+
+            clearAll() {
+                this.listContainer.innerHTML = '';
+                this.saveData();
+                this.updateStats();
+            }
+        }
+
+        // ==================== TEST RUNNER ====================
+        class TestRunner {
+            constructor() {
+                this.results = [];
+                this.passed = 0;
+                this.failed = 0;
+            }
+
+            async run(name, testFn) {
+                const startTime = performance.now();
+                try {
+                    await testFn();
+                    const endTime = performance.now();
+                    this.results.push({
+                        name,
+                        passed: true,
+                        time: Math.round(endTime - startTime)
+                    });
+                    this.passed++;
+                } catch (error) {
+                    const endTime = performance.now();
+                    this.results.push({
+                        name,
+                        passed: false,
+                        time: Math.round(endTime - startTime),
+                        error: error.message
+                    });
+                    this.failed++;
+                }
+            }
+
+            getSummary() {
+                return {
+                    total: this.results.length,
+                    passed: this.passed,
+                    failed: this.failed,
+                    tests: this.results
+                };
+            }
+        }
+
+        // Функции утверждений
+        function assert(condition, message) {
+            if (!condition) {
+                throw new Error(message || 'Assertion failed');
+            }
+        }
+
+        function assertEqual(actual, expected, message) {
+            if (actual !== expected) {
+                throw new Error(message || `Expected ${expected}, got ${actual}`);
+            }
+        }
+
+        function assertTrue(value, message) {
+            if (!value) {
+                throw new Error(message || 'Expected true');
+            }
+        }
+
+        function assertFalse(value, message) {
+            if (value) {
+                throw new Error(message || 'Expected false');
+            }
+        }
+
+        // Основные тесты
+        async function runAllTests(app, inputBox, listContainer) {
+            const runner = new TestRunner();
+            const startTime = performance.now();
+
+            // Очистка перед тестами
+            listContainer.innerHTML = '';
+            inputBox.value = '';
+            localStorage.clear();
+            app.updateStats();
+
+            // Тесты добавления
+            await runner.run('Добавление новой задачи', () => {
+                inputBox.value = 'Купить молоко';
+                const result = app.addTask();
+                assertTrue(result, 'Добавление должно вернуть true');
+                assertEqual(app.getTaskCount(), 1, 'Должна быть 1 задача');
+                assertEqual(listContainer.children[0].textContent.includes('Купить молоко'), true, 'Текст задачи неверный');
+            });
+
+            await runner.run('Недобавление пустой задачи', () => {
+                inputBox.value = '';
+                const result = app.addTask();
+                assertFalse(result, 'Пустая задача не должна добавляться');
+                assertEqual(app.getTaskCount(), 1, 'Количество задач не должно измениться');
+            });
+
+            await runner.run('Недобавление задачи с пробелами', () => {
+                inputBox.value = '   ';
+                const result = app.addTask();
+                assertFalse(result, 'Задача с пробелами не должна добавляться');
+            });
+
+            await runner.run('Очистка поля ввода после добавления', () => {
+                inputBox.value = 'Новая задача';
+                app.addTask();
+                assertEqual(inputBox.value, '', 'Поле должно быть очищено');
+            });
+
+            await runner.run('Добавление нескольких задач', () => {
+                inputBox.value = 'Задача 1';
+                app.addTask();
+                inputBox.value = 'Задача 2';
+                app.addTask();
+                inputBox.value = 'Задача 3';
+                app.addTask();
+                assertEqual(app.getTaskCount(), 4, 'Должно быть 4 задачи');
+            });
+
+            // Тесты удаления
+            await runner.run('Удаление задачи по клику на крестик', () => {
+                const deleteBtn = listContainer.querySelector('.delete-btn');
+                app.handleListClick({
+                    target: deleteBtn
+                });
+                assertEqual(app.getTaskCount(), 3, 'Должно остаться 3 задачи');
+            });
+
+            await runner.run('Неудаление при клике вне элементов', () => {
+                const countBefore = app.getTaskCount();
+                app.handleListClick({
+                    target: document.body
+                });
+                assertEqual(app.getTaskCount(), countBefore, 'Количество задач не должно измениться');
+            });
+
+            // Тесты отметки выполнения
+            await runner.run('Отметка задачи как выполненной', () => {
+                const li = listContainer.querySelector('li');
+                app.handleListClick({
+                    target: li
+                });
+                assertTrue(li.classList.contains('checked'), 'Задача должна быть отмечена');
+            });
+
+            await runner.run('Снятие отметки при повторном клике', () => {
+                const li = listContainer.querySelector('li');
+                app.handleListClick({
+                    target: li
+                });
+                app.handleListClick({
+                    target: li
+                });
+                assertFalse(li.classList.contains('checked'), 'Отметка должна быть снята');
+            });
+
+            await runner.run('getTasks возвращает статус выполнения', () => {
+                const li = listContainer.querySelector('li');
+                app.handleListClick({
+                    target: li
+                });
+                const tasks = app.getTasks();
+                assertTrue(tasks[0].completed, 'Статус должен быть true');
+            });
+
+            // Тесты LocalStorage
+            await runner.run('Сохранение в localStorage', () => {
+                const savedData = localStorage.getItem('todoData');
+                assertTrue(savedData !== null, 'Данные должны быть сохранены');
+            });
+
+            await runner.run('Загрузка из localStorage', () => {
+                const newData = localStorage.getItem('todoData');
+                assertTrue(newData.includes('Задача'), 'Данные должны содержать задачи');
+            });
+
+            await runner.run('Обновление localStorage при удалении', () => {
+                const countBefore = app.getTaskCount();
+                const deleteBtn = listContainer.querySelector('.delete-btn');
+                if (deleteBtn) {
+                    app.handleListClick({
+                        target: deleteBtn
+                    });
+                    const savedData = localStorage.getItem('todoData');
+                    assertEqual(app.getTaskCount(), countBefore - 1, 'Задача должна быть удалена');
+                }
+            });
+
+            await runner.run('Обновление localStorage при отметке', () => {
+                const li = listContainer.querySelector('li');
+                if (li) {
+                    app.handleListClick({
+                        target: li
+                    });
+                    const savedData = localStorage.getItem('todoData');
+                    assertTrue(savedData.includes('checked'), 'LocalStorage должен содержать marked задачи');
+                }
+            });
+
+            // Тесты getTasks
+            await runner.run('getTasks возвращает массив', () => {
+                const tasks = app.getTasks();
+                assertTrue(Array.isArray(tasks), 'Должен возвращать массив');
+            });
+
+            await runner.run('getTasks возвращает пустой массив если нет задач', () => {
+                app.clearAll();
+                const tasks = app.getTasks();
+                assertEqual(tasks.length, 0, 'Массив должен быть пустым');
+            });
+
+            // Дополнительные тесты
+            await runner.run('Статистика обновляется после добавления', () => {
+                inputBox.value = 'Тестовая задача';
+                app.addTask();
+                const statsText = document.getElementById('task-count').textContent;
+                assertTrue(statsText.includes('Задач:'), 'Статистика должна обновиться');
+            });
+
+            await runner.run('Очистка всех задач', () => {
+                inputBox.value = 'Задача 1';
+                app.addTask();
+                inputBox.value = 'Задача 2';
+                app.addTask();
+                app.clearAll();
+                assertEqual(app.getTaskCount(), 0, 'Все задачи должны быть удалены');
+            });
+
+            const endTime = performance.now();
+            const summary = runner.getSummary();
+            summary.time = Math.round(endTime - startTime);
+
+            return summary;
+        }
+
+        // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+        const inputBox = document.getElementById("input-box");
+        const listContainer = document.getElementById("list-container");
+        const addBtn = document.getElementById("add-btn");
+        const clearAllBtn = document.getElementById("clear-all");
+        const taskCountSpan = document.getElementById("task-count");
+
+        const app = new TodoApp(inputBox, listContainer, taskCountSpan);
+        app.loadData();
+
+        // События приложения
+        addBtn.addEventListener("click", () => {
+            app.addTask();
+        });
+
+        inputBox.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                app.addTask();
+            }
+        });
+
+        listContainer.addEventListener("click", (e) => {
+            app.handleListClick(e);
+        });
+
+        clearAllBtn.addEventListener("click", () => {
+            if (confirm('Удалить все задачи?')) {
+                app.clearAll();
+            }
+        });
+
+        // Инициализация тестов
+        const runTestsBtn = document.getElementById("run-tests");
+        const clearTestsBtn = document.getElementById("clear-tests");
+        const testResultsDiv = document.getElementById("test-results");
+
+        runTestsBtn.addEventListener("click", async() => {
+            runTestsBtn.disabled = true;
+            runTestsBtn.textContent = '⏳ Запуск...';
+
+            const results = await runAllTests(app, inputBox, listContainer);
+            displayTestResults(results);
+
+            runTestsBtn.disabled = false;
+            runTestsBtn.textContent = '▶ Запустить тесты';
+        });
+
+        clearTestsBtn.addEventListener("click", () => {
+            testResultsDiv.innerHTML = `
+                <div class="empty-state">
+                    <p>Нажмите "Запустить тесты" для проверки</p>
+                </div>
+            `;
+            document.getElementById("total-tests").textContent = '0';
+            document.getElementById("passed-tests").textContent = '0';
+            document.getElementById("failed-tests").textContent = '0';
+            document.getElementById("test-time").textContent = '0ms';
+        });
+
+        function displayTestResults(results) {
+            document.getElementById("total-tests").textContent = results.total;
+            document.getElementById("passed-tests").textContent = results.passed;
+            document.getElementById("failed-tests").textContent = results.failed;
+            document.getElementById("test-time").textContent = results.time + 'ms';
+
+            let html = '';
+            results.tests.forEach(test => {
+                const statusClass = test.passed ? 'passed' : 'failed';
+                const statusIcon = test.passed ? '✅' : '❌';
+                const errorHtml = test.error ? `<div class="test-error">${test.error}</div>` : '';
+
+                html += `
+                    <div class="test-item ${statusClass}">
+                        <div class="test-info">
+                            <span class="test-icon">${statusIcon}</span>
+                            <span class="test-name">${test.name}</span>
+                        </div>
+                        <div class="test-time">${test.time}ms</div>
+                        ${errorHtml}
+                    </div>
+                `;
+            });
+
+            testResultsDiv.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

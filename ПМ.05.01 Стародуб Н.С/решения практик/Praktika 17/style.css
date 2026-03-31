@@ -1,0 +1,146 @@
+/* Убираем отступы у всех элементов */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Стили для body */
+
+body {
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+
+/* Стили для контейнера формы */
+
+.container {
+    background-color: #0d0e66;
+    padding: 30px 20px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    width: fit-content;
+}
+
+
+/* Стили для заголовка формы */
+
+h1 {
+    font-size: 22px;
+}
+
+
+/* Стили для самой формы */
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    row-gap: 10px;
+    height: 300px;
+}
+
+
+/* Общие стили для input, select и button */
+
+input,
+select,
+button {
+    height: 30px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 6px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 14px;
+}
+
+
+/* Стили для placeholder в input и select */
+
+input::placeholder,
+select::placeholder {
+    font-size: 22px;
+}
+
+
+/* Стили для фона input и select */
+
+input,
+select {
+    background-color: #9fcee2;
+    outline: none;
+}
+
+
+/* Стили при фокусе на input или select */
+
+input:focus,
+select:focus {
+    background-color: white;
+    outline: none;
+}
+
+
+/* Стили для кнопок */
+
+button {
+    background-color: #5ca0ff;
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+
+/* Стили при наведении на кнопку */
+
+button:hover {
+    background-color: #17488d;
+}
+
+
+/* Стиль для текста "Повторите пароль" */
+
+#repeatPassword {
+    font-size: 24px;
+}
+
+
+/* Сообщения об ошибках */
+
+
+/* Сообщения об ошибках */
+
+.error-message {
+    color: red;
+    text-align: center;
+    display: none;
+    /* Скрыто по умолчанию */
+}
+
+
+/* Класс для невалидного пароля */
+
+.password-invalid {
+    border: 2px solid red;
+    /* display не применяется к border, но поле будет получать/терять этот класс */
+}
+
+
+/* Сообщение об успешной отправке */
+
+.success-message {
+    color: green;
+    text-align: center;
+    display: none;
+    /* Скрыто по умолчанию */
+}

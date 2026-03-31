@@ -1,0 +1,30 @@
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.exe.config
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.exe
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.pdb
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.AssemblyReference.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\MainWindow.g.cs
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\App.g.cs
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина_MarkupCompile.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина_MarkupCompile.lref
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\MainWindow.baml
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.g.resources
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр_3._5_Горячкина.Properties.Resources.resources
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.GenerateResource.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.CoreCompileInputs.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.exe
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.pdb
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.exe.config
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.exe
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\bin\Debug\Пр 3.5 Горячкина.pdb
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.AssemblyReference.cache
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\MainWindow.g.cs
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\App.g.cs
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина_MarkupCompile.cache
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина_MarkupCompile.lref
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\MainWindow.baml
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.g.resources
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр_3._5_Горячкина.Properties.Resources.resources
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.GenerateResource.cache
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.csproj.CoreCompileInputs.cache
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.exe
+E:\WPF ПМ.05\Пр 3.5 Горячкина\Пр 3.5 Горячкина\obj\Debug\Пр 3.5 Горячкина.pdb

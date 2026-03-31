@@ -1,0 +1,71 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Praktika3
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            //Ввод размера массива
+            Console.WriteLine("Сколько чисел сгенерировать? ");
+            int n = int.Parse(Console.ReadLine());
+
+            //Создание и заполнение массива
+            double[] arr = new double[n];
+            Random rnd = new Random();
+
+            for (int i = 0; i < n; i++)
+            {
+                //Генерируем число от -10 до 10
+                //NextDouble() дает число от 0 до 1
+                // * 20 -> от 0 до 20
+                // - 10 -> от -10 до 20
+
+                arr[i] = rnd.NextDouble() * 20 - 10;
+            }
+
+            //Шаг 3: вывод массива
+            Console.WriteLine("\nМассив:");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write($"{arr[i]:F2}  "); // F2 - 2 занка после запятой
+                if ((i + 1) % 10 == 0) Console.WriteLine(); // Перенос каждые 10 чисел
+
+            }
+
+            // Шаг 4: Первый проход - поиск минимального положительного
+            // Плохо: Используем 1000 вместо правильного значения
+
+            double min = 1000;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (arr[i] > 0 && arr[i] < min)
+                {
+                    min = arr[i];
+                }
+            }
+
+            // Шаг 5: Второй проход - вывод всех элементов, равных минимуму
+            // Плохо: второй проход по массиву - тратим лишнее время
+
+            Console.WriteLine($"\n\n Минимальное положительное: {min:F4}");
+            Console.WriteLine("Все элементы с этим значением: ");
+
+            for (int i = 0;i < n; i++)
+            {
+                if (arr[i] > 0 && Math.Abs(arr[i] - min) < 0.0001)
+                {
+                    Console.WriteLine($" [{i}] = {arr[i]:F4}");
+                }
+            }
+
+            Console.ReadKey();
+        }
+    }
+}
+ 

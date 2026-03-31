@@ -1,0 +1,30 @@
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.AssemblyReference.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\MainWindow.g.cs
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\App.g.cs
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина_MarkupCompile.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина_MarkupCompile.lref
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.exe.config
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.exe
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.pdb
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\MainWindow.baml
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.g.resources
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр_2_ListBox_Горячкина.Properties.Resources.resources
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.GenerateResource.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.CoreCompileInputs.cache
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.exe
+C:\Users\Арина\Desktop\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.pdb
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.exe.config
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.exe
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\bin\Debug\Пр 2 ListBox Горячкина.pdb
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.AssemblyReference.cache
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\MainWindow.g.cs
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\App.g.cs
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина_MarkupCompile.cache
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина_MarkupCompile.lref
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\MainWindow.baml
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.g.resources
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр_2_ListBox_Горячкина.Properties.Resources.resources
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.GenerateResource.cache
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.csproj.CoreCompileInputs.cache
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.exe
+E:\WPF ПМ.05\Пр 2 ListBox Горячкина\Пр 2 ListBox Горячкина\obj\Debug\Пр 2 ListBox Горячкина.pdb

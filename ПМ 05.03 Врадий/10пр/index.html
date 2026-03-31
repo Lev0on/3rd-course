@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List с тестами</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Приложение -->
+        <div class="app-container">
+            <div class="container">
+                <h1>📝 Список задач</h1>
+                <div class="input-group">
+                    <input type="text" id="input-box" placeholder="Что нужно сделать?">
+                    <button id="add-btn">Добавить</button>
+                </div>
+                <ul id="list-container"></ul>
+                <div class="stats">
+                    <span id="task-count">Задач: 0</span>
+                    <button id="clear-all">Очистить всё</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Панель тестов -->
+        <div class="test-panel">
+            <div class="test-header">
+                <h2>🧪 Unit Тесты</h2>
+                <div class="test-controls">
+                    <button id="run-tests" class="run-btn">▶ Запустить тесты</button>
+                    <button id="clear-tests" class="clear-btn">🗑 Очистить</button>
+                </div>
+            </div>
+
+            <div class="test-summary">
+                <div class="summary-item">
+                    <span class="label">Всего:</span>
+                    <span id="total-tests" class="value">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">✅ Пройдено:</span>
+                    <span id="passed-tests" class="value passed">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">❌ Провалено:</span>
+                    <span id="failed-tests" class="value failed">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="label">⏱ Время:</span>
+                    <span id="test-time" class="value">0ms</span>
+                </div>
+            </div>
+
+            <div id="test-results" class="test-results">
+                <div class="empty-state">
+                    <p>Нажмите "Запустить тесты" для проверки</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { TodoApp } from './todo.js'; import { runAllTests } from 'tests.js'; // Инициализация приложения const inputBox = document.getElementById("input-box"); const listContainer = document.getElementById("list-container"); const addBtn = document.getElementById("add-btn");
+        const clearAllBtn = document.getElementById("clear-all"); const taskCountSpan = document.getElementById("task-count"); const app = new TodoApp(inputBox, listContainer, taskCountSpan); app.loadData(); // События приложения addBtn.addEventListener("click",
+        () => { app.addTask(); app.updateStats(); }); inputBox.addEventListener("keypress", (e) => { if (e.key === "Enter") { app.addTask(); app.updateStats(); } }); listContainer.addEventListener("click", (e) => { app.handleListClick(e); app.updateStats();
+        }); clearAllBtn.addEventListener("click", () => { if (confirm('Удалить все задачи?')) { listContainer.innerHTML = ''; app.saveData(); app.updateStats(); } }); // Инициализация тестов const runTestsBtn = document.getElementById("run-tests"); const
+        clearTestsBtn = document.getElementById("clear-tests"); const testResultsDiv = document.getElementById("test-results"); runTestsBtn.addEventListener("click", async () => { runTestsBtn.disabled = true; runTestsBtn.textContent = '⏳ Запуск...'; const
+        results = await runAllTests(app, inputBox, listContainer); displayTestResults(results); runTestsBtn.disabled = false; runTestsBtn.textContent = '▶ Запустить тесты'; }); clearTestsBtn.addEventListener("click", () => { testResultsDiv.innerHTML =
+        `
+        <div class="empty-state">
+            <p>Нажмите "Запустить тесты" для проверки</p>
+        </div>
+        `; document.getElementById("total-tests").textContent = '0'; document.getElementById("passed-tests").textContent = '0'; document.getElementById("failed-tests").textContent = '0'; document.getElementById("test-time").textContent = '0ms'; }); function displayTestResults(results)
+        { document.getElementById("total-tests").textContent = results.total; document.getElementById("passed-tests").textContent = results.passed; document.getElementById("failed-tests").textContent = results.failed; document.getElementById("test-time").textContent
+        = results.time + 'ms'; let html = ''; results.tests.forEach(test => { const statusClass = test.passed ? 'passed' : 'failed'; const statusIcon = test.passed ? '✅' : '❌'; const errorHtml = test.error ? `
+        <div class="test-error">${test.error}</div>` : ''; html += `
+        <div class="test-item ${statusClass}">
+            <div class="test-info">
+                <span class="test-icon">${statusIcon}</span>
+                <span class="test-name">${test.name}</span>
+            </div>
+            <div class="test-time">${test.time}ms</div>
+            ${errorHtml}
+        </div>
+        `; }); testResultsDiv.innerHTML = html; }
+    </script>
+</body>
+
+</html>

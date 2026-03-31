@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="props" style="font: 1.5em sans-serif"></p>
+
+    <script>
+        (function() {
+            const info = document.getElementById('props')
+            let width = window.screen.width + 'px'
+            let height = window.screen.height + 'px'
+            let avaiLW = window.screen.availWidth + 'px'
+            let avaiLH = window.screen.availHeight + 'px'
+            let colors = 'Unknown'
+
+            switch (window.screen.colorDepth) {
+                case 8:
+                    'Low color';
+                    break
+                case 16:
+                    'High color';
+                    break
+                case 24:
+                    'True color';
+                    break
+                case 32:
+                    'Deep color';
+                    break
+            }
+
+            info.innerHTML += 'Srceen Resolution: ' + width + ' x ' + height + '<br>'
+            info.innerHTML += 'Avalible Screen Size: ' + avaiLW + ' x ' + avaiLH + '<br>'
+            info.innerHTML += 'Color Capability: ' + colors + '<br>'
+
+            if (window.screen.orientation) {
+                innerHTML += 'Orientation: ' + window.screen.orientation.type
+            }
+        })()
+    </script>
+</body>
+
+</html>

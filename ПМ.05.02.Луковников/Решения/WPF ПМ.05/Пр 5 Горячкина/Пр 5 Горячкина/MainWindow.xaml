@@ -1,0 +1,52 @@
+﻿<Window x:Class="Пр_5_Горячкина.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Пр_5_Горячкина"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5 10 5 5">
+            <Label Content="Поиск:" FontSize="12"></Label>
+            <TextBox Width="150" x:Name="SearchText" TextChanged="SearchText_TextChanged"></TextBox>
+        </StackPanel>
+        <DataGrid x:Name="DgUsers" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Возраст" Width="*" Binding="{Binding Age}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата рождения" Width="*" Binding="{Binding Birthday}"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="250" Height="30" Content="Выбрать пользователя" HorizontalAlignment="Center" Click="InfoUser"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="200" Height="30" Content="Удалить пользователя" HorizontalAlignment="Center" Click="DeleteUser"></Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Margin="10 10 0 0" HorizontalAlignment="Left">
+            <Label Content="Редактирование пользователя: " FontSize="14"></Label>
+            <StackPanel Orientation="Horizontal" Margin="5" >
+                <TextBlock Text="Имя: " FontSize="12" Margin="5 0 0 0" Width="100"></TextBlock>
+                <TextBox FontSize="12" Width="120" Margin="5 0 0 0" x:Name="EditName"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Возраст: " FontSize="12" Margin="5 0 0 0" Width="100"></TextBlock>
+                <TextBox FontSize="12" Width="120" Margin="5 0 0 0" x:Name="EditAge"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" >
+                <TextBlock Text="Дата рождения:" FontSize="12" Margin="5 0 0 0" Width="100"></TextBlock>
+                <DatePicker FontSize="12" Width="120" Margin="5 0 0 0" x:Name="EditBirthday"></DatePicker>
+            </StackPanel>
+            <Button Width="200" Height="28" Content="Сохранить" Click="EditUserClick"></Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

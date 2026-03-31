@@ -1,0 +1,81 @@
+﻿<Window x:Class="Пр_4_Горячкина.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Пр_4_Горячкина"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel>
+        <Label Content="Пользователи" FontSize="18" HorizontalAlignment="Center"></Label>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <ComboBox x:Name="CBAge" Width="200" Height="28" SelectionChanged="CBAge_SelectionChanged"></ComboBox>
+        </StackPanel>
+        <ListView x:Name="LVUsers" SelectionChanged="LVUsers_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="180" Height="75">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Имя: " VerticalAlignment="Center" FontSize="12"></Label>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Возраст: " VerticalAlignment="Center" FontSize="12"></Label>
+                            <TextBlock Text="{Binding Age}" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Дата рождения: " VerticalAlignment="Center" FontSize="12"></Label>
+                            <TextBlock Text="{Binding Birthday}" VerticalAlignment="Center" FontSize="15"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel>
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
+        <StackPanel Margin="15 15 0 0" HorizontalAlignment="Left">
+            <Label Content="Создание нового пользователя: " FontSize="20"></Label>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Имя: " FontSize="15" Margin="5 0 0 0" Width="110"></TextBlock>
+                <TextBox FontSize="15" Width="150" Margin="5 0 0 0" x:Name="NameTB"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Возраст: " FontSize="15" Margin="5 0 0 0" Width="110"></TextBlock>
+                <TextBox FontSize="15" Width="150" Margin="5 0 0 0" x:Name="AgeTB"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Дата рождения: " FontSize="15" Margin="5 0 0 0" Width="110"></TextBlock>
+                <DatePicker FontSize="15" Width="150" Margin="5 0 0 0" x:Name="BirthdayTB"></DatePicker>
+            </StackPanel>
+            <Button Content="Создать" Width="175" Height="22" Click="AddNewUser"></Button>
+            </StackPanel>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5 10 5 5">
+            <Label Content="Поиск:" FontSize="16"></Label>
+            <TextBox Width="250" x:Name="SearchText" TextChanged="SearchText_TextChanged"></TextBox>
+        </StackPanel>
+
+        <StackPanel Margin="15 15 0 0" HorizontalAlignment="Left">
+            <Label Content="Редактирование пользователя: " FontSize="20"></Label>
+            <StackPanel Orientation="Horizontal" Margin="5" >
+                <TextBlock Text="Имя: " FontSize="15" Margin="5 0 0 0" Width="120"></TextBlock>
+                <TextBox FontSize="15" Width="150" Margin="5 0 0 0" x:Name="EditNameTB"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <TextBlock Text="Возраст: " FontSize="15" Margin="5 0 0 0" Width="120"></TextBlock>
+                <TextBox FontSize="15" Width="150" Margin="5 0 0 0" x:Name="EditAgeTB"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" Width="300">
+                <TextBlock Text="Дата рождения:" FontSize="15" Margin="5 0 0 0" Width="120"></TextBlock>
+                <DatePicker FontSize="15" Width="150" Margin="5 0 0 0" x:Name="EditBirthdayTB"></DatePicker>
+            </StackPanel>
+                <Button Width="175" Height="22" Content="Сохранить" Click="EditItemClick"></Button>
+                <TextBlock x:Name="SelectItemForDelete" FontWeight="DemiBold"></TextBlock>
+                <Button Height="25" Width="150" x:Name="DeleteButton" Content="Удалить" Margin="5 10 5 5" Click="DeleteButton_Click"/>
+            </StackPanel>
+    </StackPanel>
+</Window>

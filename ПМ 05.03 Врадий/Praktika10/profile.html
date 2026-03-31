@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container profile-container">
+        <div class="card">
+            <h1>Добро пожаловать!</h1>
+            <p>Вы успешно вошли в систему.</p>
+            <div class="user-info">
+                <p><strong>Имя:</strong> <span id="display-name"></span></p>
+                <p><strong>Email:</strong> <span id="display-email"></span></p>
+            </div>
+            <button onclick="logout()" class="btn-danger">Выйти</button>
+            <button onclick="goToProfile()" class="btn-danger">Не нажимай</button>
+
+            <hr>
+            <p style="font-size: 0.8em; color: #666;">
+                <a href="javascript:void(0)" id="download-link">Скачать базу пользователей (JSON)</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для ввода пароля -->
+    <div id="password-modal" class="modal hidden">
+        <div class="modal-content">
+            <h3>Введите пароль администратора</h3>
+            <input type="password" id="admin-password" placeholder="Пароль администратора">
+            <p id="modal-error" class="error-msg"></p>
+            <div class="modal-buttons">
+                <button onclick="checkAdminPassword()" class="btn-primary">Подтвердить</button>
+                <button onclick="closeModal()" class="btn-danger1">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Стили для модального окна */
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .modal.hidden {
+            display: none;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 300px;
+        }
+        
+        .modal-content h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .modal-buttons button {
+            flex: 1;
+            max-width: 120px;
+        }
+    </style>
+
+    <script>
+        // Проверка сессии при загрузке
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (!user) {
+            window.location.href = 'index.html';
+        } else {
+            document.getElementById('display-name').innerText = user.username;
+            document.getElementById('display-email').innerText = user.email;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Пароль администратора (в реальном проекте хранить на сервере!)
+        const ADMIN_PASSWORD = "adminq";
+
+        // Открытие модального окна
+        document.addEventListener('DOMContentLoaded', () => {
+            const downloadLink = document.getElementById('download-link');
+            if (downloadLink) {
+                downloadLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openModal();
+                });
+            }
+        });
+
+        function openModal() {
+            document.getElementById('password-modal').classList.remove('hidden');
+            document.getElementById('admin-password').value = '';
+            document.getElementById('modal-error').innerText = '';
+            document.getElementById('admin-password').focus();
+        }
+
+        function closeModal() {
+            document.getElementById('password-modal').classList.add('hidden');
+        }
+
+        function checkAdminPassword() {
+            const inputPassword = document.getElementById('admin-password').value;
+            const errorEl = document.getElementById('modal-error');
+
+            if (inputPassword === ADMIN_PASSWORD) {
+                closeModal();
+                downloadDB();
+            } else {
+                errorEl.innerText = 'Неверный пароль администратора!';
+                document.getElementById('admin-password').value = '';
+
+                // Логирование попытки (для практики)
+                console.warn('Попытка несанкционированного доступа к базе данных!');
+            }
+        }
+
+        // Подтверждение по Enter
+        document.getElementById('admin-password') ?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                checkAdminPassword();
+            }
+        });
+
+        function downloadDB() {
+            const db = localStorage.getItem('usersDB');
+
+            if (!db || db === '[]') {
+                alert('База данных пуста! Зарегистрируйте пользователей сначала.');
+                return;
+            }
+
+            try {
+                const blob = new Blob([db], {
+                    type: "application/json"
+                });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "users.json";
+                a.style.display = 'none';
+
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+
+                alert('База данных успешно скачана!');
+
+            } catch (e) {
+                console.error('Ошибка скачивания:', e);
+                alert('Не удалось скачать файл. Проверьте консоль браузера.');
+            }
+        }
+
+        function goToProfile() {
+            window.location.href = 'GPT.jpg';
+        }
+    </script>
+</body>
+
+</html>

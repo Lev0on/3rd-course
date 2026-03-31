@@ -1,0 +1,67 @@
+﻿<Window x:Class="ct.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ct"
+        mc:Ignorable="d"
+        Title="Окно авторизации" Height="450" Width="800">
+    <Grid Margin="25">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Вход"
+                   FontSize="20"
+                   FontWeight="Light"
+                   HorizontalAlignment="Left"
+                   Margin="0,0,0,20"
+                   Grid.Row="0"/>
+
+        <!-- Надпись "Логин" -->
+        <TextBlock Text="Логин"
+                   Grid.Row="1"
+                   Foreground="#555"
+                   Margin="0,0,0,4"/>
+
+        <!-- Поле ввода логина -->
+        <TextBox x:Name="LoginBox"
+                 Grid.Row="2"
+                 Height="28"
+                 Padding="6,0"
+                 BorderBrush="#E0E0E0"
+                 BorderThickness="1"
+                 VerticalContentAlignment="Center"/>
+
+        <!-- Надпись "Пароль" -->
+        <TextBlock Text="Пароль"
+                   Grid.Row="3"
+                   Foreground="#555"
+                   Margin="0,12,0,4"/>
+
+        <!-- Поле ввода пароля -->
+        <PasswordBox x:Name="PasswordBox"
+                     Grid.Row="4"
+                     Height="28"
+                     Padding="6,0"
+                     BorderBrush="#E0E0E0"
+                     BorderThickness="1"
+                     VerticalContentAlignment="Center"/>
+
+        <!-- Кнопка входа -->
+        <Button x:Name="LoginButton"
+                Content="Войти"
+                Grid.Row="4"
+                Height="32"
+                Margin="0,76,0,-56"
+                Background="#1A73E8"
+                Foreground="White"
+                BorderThickness="0"
+                Click="LoginButton_Click"/>
+    </Grid>
+</Window>

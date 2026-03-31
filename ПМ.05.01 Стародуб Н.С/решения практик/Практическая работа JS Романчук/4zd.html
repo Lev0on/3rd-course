@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p id="info" style="width: 2000px;margin-left: 300px;font: 1.2em sans-serif"></p>
+
+    <script>
+        (function() {
+
+            const info = document.getElementById('info')
+
+            let i = 0
+
+            for (i = 1; i < 41; i++) {
+                info.innerHTML += (i + '<br>')
+            }
+
+            window.scrollBy(200, info.clientHeight)
+
+            info.innerHTML += 'scrollX: ' + window.scrollX + '& scrollY' + window.scrollY
+        })()
+    </script>
+</body>
+
+</html>

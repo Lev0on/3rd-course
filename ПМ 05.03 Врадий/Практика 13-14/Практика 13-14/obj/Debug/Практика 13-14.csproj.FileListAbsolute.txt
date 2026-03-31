@@ -1,0 +1,21 @@
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\bin\Debug\Практика 13-14.exe.config
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\bin\Debug\Практика 13-14.exe
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\bin\Debug\Практика 13-14.pdb
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.csproj.AssemblyReference.cache
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\LoginWindow.g.cs
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\MainWindow.g.cs
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\App.g.cs
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14_MarkupCompile.cache
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14_MarkupCompile.lref
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\LoginWindow.baml
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\MainWindow.baml
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.g.resources
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика_13_14.Properties.Resources.resources
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.csproj.GenerateResource.cache
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.csproj.CoreCompileInputs.cache
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.exe
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\Практика 13-14.pdb
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\AddNewTaskWindow.g.cs
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\EditTaskWindow.g.cs
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\AddNewTaskWindow.baml
+C:\Users\лева\Desktop\Практика 13-14\Практика 13-14\obj\Debug\EditTaskWindow.baml
