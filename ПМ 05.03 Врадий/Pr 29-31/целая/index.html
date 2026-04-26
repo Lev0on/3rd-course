@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuestLog — твои квесты</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+    <header>
+        <h1>QuestLog</h1>
+        <p>Становись героем каждый день</p>
+    </header>
+
+    <main>
+        <!-- Форма добавления -->
+        <section id="add-section">
+            <h2>Добавить новый квест</h2>
+            <form id="add-form">
+                <input type="text" id="name" placeholder="Название квеста" required>
+                <textarea id="description" placeholder="Краткое описание"></textarea>
+                <select id="type">
+                    <option value="daily">Ежедневный</option>
+                    <option value="weekly">Еженедельный</option>
+                </select>
+                           <button type="submit">Добавить квест</button>
+        </form>
+    </section>
+
+    <!-- Список квестов -->
+    <section id="list-section">
+        <h2>Мои квесты</h2>
+        <div id="habits-list"></div>
+    </section>
+
+    <!-- Статистика -->
+    <section id="stats-section">
+        <h2>Статистика</h2>
+        <div id="stats"></div>
+        <button id="motivation-btn">Получить мотивацию</button>
+    </section>
+
+    <!-- История -->
+    <section id="history-section">
+        <h2>История за 7 дней</h2>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Дата</th>
+                    <th>Выполнено</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+</main>
+
+<script src="script/script.js"></script>
+</body>
+</html>

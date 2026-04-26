@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Cinnabon – Интернет-магазин синабонов</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Шапка и навигация -->
+    <header class="header">
+        <div class="container header__content">
+            <a href="image/gpt.png" class="logo">🥐 Сладенькие синабоны от Левы и Дани</a>
+            <nav class="nav">
+                <a href="#catalog">Каталог</a>
+                <a href="#order">Оформление</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <button class="cart-btn" id="open-cart">🛒 Корзина (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Герой-секция -->
+        <section id="hero" class="hero">
+            <div class="container hero__content">
+                <h1>Свежайшие синабоны с доставкой</h1>
+                <p>Нежное тесто, ароматная корица и фирменный сливочный крем. Закажите прямо сейчас!</p>
+                <a href="#catalog" class="btn btn--primary">Сделать заказ</a>
+            </div>
+        </section>
+
+        <!-- Каталог -->
+        <section id="catalog" class="catalog">
+            <div class="container">
+                <h2>Наши синабоны</h2>
+                <!-- Фильтры -->
+                <div class="filters">
+                    <input type="text" id="search-input" placeholder="🔍 Поиск по названию..." class="filter-input">
+                    <select id="size-filter" class="filter-input">
+                        <option value="all">Все размеры</option>
+                        <option value="standard">Стандартный</option>
+                        <option value="large">Большой</option>
+                    </select>
+                    <input type="number" id="price-filter" placeholder="Макс. цена, ₽" min="0" class="filter-input">
+                </div>
+                <!-- Сетка товаров -->
+                <div class="catalog-grid" id="catalog-grid">
+                    <!-- Карточки генерируются через JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма заказа -->
+        <section id="order" class="order-section">
+            <div class="container">
+                <h2>Оформление заказа</h2>
+                <form id="order-form" class="order-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Имя *</label>
+                        <input type="text" id="name" name="name" placeholder="Только буквы" required>
+                        <small class="error-msg" id="name-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+                        <small class="error-msg" id="phone-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Адрес доставки *</label>
+                        <input type="text" id="address" name="address" placeholder="Улица, дом, квартира" required>
+                        <small class="error-msg" id="address-error"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Комментарий</label>
+                        <textarea id="comment" name="comment" placeholder="Пожелания к заказу"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--accent">Подтвердить заказ</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Контакты -->
+        <section id="contacts" class="contacts">
+            <div class="container">
+                <h2>Контакты</h2>
+                <p>📍 г. Веселая жизнь, ул. Пушкина, д. Колотушкина, кв. Не твое собачье дело</p>
+                <p>📞 +7 (999) 123-45-67</p>
+                <p>🕒 Пн-Вс: 09:00 – 21:00</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <!-- <div class="container">
+            <p>&copy; 2026 Sweet Cinnabon. Все права защищены.</p>
+        </div> -->
+    </footer>
+
+    <!-- Модальное окно: Корзина (слайдер справа) -->
+    <div class="modal-overlay" id="cart-modal">
+        <div class="modal cart-panel">
+            <div class="modal-header">
+                <h3>🛒 Ваша корзина</h3>
+                <button class="close-modal" id="close-cart">&times;</button>
+            </div>
+            <div class="cart-items" id="cart-items">
+                <p class="empty-msg">Корзина пуста</p>
+            </div>
+            <div class="cart-footer">
+                <p>Итого: <span id="cart-total">0</span> ₽</p>
+                <button class="btn btn--accent" id="checkout-btn" disabled>Оформить заказ</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Подробности товара -->
+    <div class="modal-overlay" id="details-modal">
+        <div class="modal details-modal">
+            <button class="close-modal" id="close-details">&times;</button>
+            <div id="details-content"></div>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Успех -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal success-modal">
+            <h2>✅ Заказ успешно оформлен!</h2>
+            <p>Наш менеджер свяжется с вами в ближайшее время для подтверждения.</p>
+            <button class="btn btn--primary" id="close-success">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="script/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,186 @@
+/* 1. Глобальные стили и фоновый орнамент */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #0f172a; /* Темно-синий фон */
+    
+    /* ОРНАМЕНТ С ДИНОЗАВРОМ */
+    /* Используем SVG-паттерн с прозрачностью 0.05, чтобы он не мешал чтению */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 100 100'%3E%3Ctext y='50' font-size='35' opacity='0.05'%3E🦖%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    /* Чтобы заголовок лучше читался на фоне орнамента */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+h1 {
+    color: #22d3ee;
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+/* 2. Макет (Сетка) */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Две колонки */
+    gap: 25px;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 850px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Контейнеры секций */
+section {
+    background: #1e293b; /* Исправлен цвет на валидный hex */
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/**
+ * ИСПРАВЛЕНИЕ: Единый размер всех полей ввода
+ */
+input,
+textarea,
+select,
+button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-size: 15px;
+    font-family: inherit;
+    /* Ключевое исправление: padding не влияет на итоговую ширину */
+    box-sizing: border-box;
+    display: block;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Фокус на полях */
+input:focus, textarea:focus, select:focus {
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+}
+
+/* Ограничение для текстового поля */
+textarea {
+    resize: none;
+    height: 90px;
+}
+
+/* Стили кнопок */
+button {
+    background: #22d3ee;
+    color: #0f172a;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}
+
+button:hover {
+    background: #67e8f9;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Кнопка мотивации (второстепенная) */
+#motivation-btn {
+    background: transparent;
+    border: 2px solid #22d3ee;
+    color: #22d3ee;
+}
+
+#motivation-btn:hover {
+    background: #22d3ee;
+    color: #0f172a;
+}
+
+/**
+ * Список квестов и элементов
+ */
+#habits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.habit-item {
+    background: #334155;
+    padding: 15px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #22d3ee;
+    transition: transform 0.2s;
+}
+
+.habit-item:hover {
+    transform: scale(1.02);
+}
+
+/* Таблица истории */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+th {
+    color: #22d3ee;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* Статистика */
+#stats p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+#stats strong {
+    color: #22d3ee;
+}
+
+/* Стиль для выполненной задачи */
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.completed strong {
+    color: #94a3b8; /* Серый цвет для заголовка */
+}

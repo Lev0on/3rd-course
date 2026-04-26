@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Система бронирования билетов в кино</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #e94560;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .booking-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .step-card h2 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .screen {
+            background: linear-gradient(180deg, #fff 0%, #ddd 100%);
+            height: 60px;
+            margin: 20px 0;
+            border-radius: 10px 10px 50% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+        
+        .seats-container {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 8px;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+        
+        .seat {
+            width: 40px;
+            height: 40px;
+            background: #444;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #fff;
+        }
+        
+        .seat:hover {
+            transform: scale(1.1);
+            background: #666;
+        }
+        
+        .seat.selected {
+            background: #e94560;
+            box-shadow: 0 0 10px #e94560;
+        }
+        
+        .seat.occupied {
+            background: #333;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .seat.legend {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 12px;
+        }
+        
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .viewer-form {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .viewer-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            background: #e94560;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: #ff6b6b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+        }
+        
+        .btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .summary {
+            background: rgba(233, 69, 96, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .total {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+            text-align: center;
+            border: 2px solid #e94560;
+        }
+        
+        .modal h2 {
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+        
+        .success-icon {
+            font-size: 60px;
+            color: #4ade80;
+            margin-bottom: 20px;
+        }
+        
+        .error-icon {
+            font-size: 60px;
+            color: #e94560;
+            margin-bottom: 20px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .notification.success {
+            background: #4ade80;
+        }
+        
+        .notification.error {
+            background: #e94560;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .age-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+        
+        .badge-child {
+            background: #4ade80;
+            color: #000;
+        }
+        
+        .badge-student {
+            background: #60a5fa;
+            color: #fff;
+        }
+        
+        .badge-adult {
+            background: #e94560;
+            color: #fff;
+        }
+        
+        .badge-senior {
+            background: #fbbf24;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎬 Система бронирования билетов в кино</h1>
+
+        <div class="booking-steps">
+            <!-- Шаг 1: Выбор фильма -->
+            <div class="step-card">
+                <h2>Выберите фильм</h2>
+                <select id="movieSelect">
+                    <option value="">-- Выберите фильм --</option>
+                    <option value="avatar2">Аватар: Путь воды</option>
+                    <option value="topgun">Топ Ган: Мэверик</option>
+                    <option value="minions">Миньоны: Грювитация</option>
+                    <option value="thor">Тор: Любовь и гром</option>
+                    <option value="jurassic">Мир Юрского периода</option>
+                </select>
+            </div>
+
+            <!-- Шаг 2: Выбор кинотеатра и зала -->
+            <div class="step-card">
+                <h2>Выберите кинотеатр и зал</h2>
+                <select id="cinemaSelect">
+                    <option value="">-- Выберите кинотеатр --</option>
+                    <option value="c1">Киномакс Плаза</option>
+                    <option value="c2">Каро Фильм</option>
+                    <option value="c3">Синема Парк</option>
+                </select>
+                <select id="hallSelect" disabled>
+                    <option value="">-- Выберите зал --</option>
+                    <option value="h1">Зал 1 (IMAX)</option>
+                    <option value="h2">Зал 2 (3D)</option>
+                    <option value="h3">Зал 3 (Стандарт)</option>
+                </select>
+            </div>
+
+            <!-- Шаг 3: Дата и время -->
+            <div class="step-card">
+                <h2>Выберите дату и время </h2>
+                <input type="date" id="dateSelect">
+                <select id="timeSelect" disabled>
+                    <option value="">-- Выберите время --</option>
+                    <option value="10:00">10:00</option>
+                    <option value="13:00">13:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="19:00">19:00</option>
+                    <option value="22:00">22:00</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Выбор мест -->
+        <div class="step-card">
+            <h2>Выберите место</h2>
+            <div class="screen">ЭКРАН</div>
+
+            <div class="seat-legend">
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #444;"></div>
+                        <span>Свободно</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #e94560;"></div>
+                        <span>Выбрано</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #333;"></div>
+                        <span>Занято</span>
+                    </div>
+                </div>
+                <p style="margin-top: 10px; color: #aaa;">Максимум 6 билетов за одно бронирование</p>
+            </div>
+
+            <div class="seats-container" id="seatsContainer"></div>
+        </div>
+
+        <!-- Данные зрителей -->
+        <div class="viewer-form">
+            <h2>заполните свои данные</h2>
+            <p style="color: #aaa; margin-bottom: 15px;">
+                Дети до 14 лет требуют сопровождения взрослого (18+)<br> Дети до 6 лет — бесплатно (но место занимают)
+            </p>
+            <div id="viewersContainer"></div>
+            <button class="btn" onclick="addViewer()" style="background: #4ade80; margin-top: 10px;">
+                + Добавить зрителя
+            </button>
+        </div>
+
+        <!-- Итоговая информация -->
+        <div class="summary">
+            <h2>Подтверждение заказа</h2>
+            <div class="summary-item">
+                <span>Выбрано мест:</span>
+                <span id="selectedSeatsCount">0</span>
+            </div>
+            <div class="summary-item">
+                <span>Зрителей:</span>
+                <span id="viewersCount">0</span>
+            </div>
+            <div class="summary-item">
+                <span>Стоимость билетов:</span>
+                <span id="basePrice">0 ₽</span>
+            </div>
+            <div class="summary-item">
+                <span>Скидка (от 4 билетов):</span>
+                <span id="discount">0 ₽</span>
+            </div>
+            <div class="summary-item total">
+                <span>Итого к оплате:</span>
+                <span id="totalPrice">0 ₽</span>
+            </div>
+        </div>
+
+        <!-- Кнопка бронирования -->
+        <button class="btn" onclick="confirmBooking()" id="confirmBtn" disabled style="margin-top: 20px;">
+            Подтвердить бронирование
+        </button>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="success-icon" id="modalIcon">✓</div>
+            <h2 id="modalTitle">Бронирование успешно!</h2>
+            <p id="modalMessage"></p>
+            <button class="btn" onclick="closeModal()" style="margin-top: 20px;">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        // ==================== КОНФИГУРАЦИЯ СИСТЕМЫ ====================
+        const CONFIG = {
+            PRICES: {
+                CHILD: 250, // до 12 лет
+                STUDENT: 300, // 12-25 лет
+                STANDARD: 400, // 26-59 лет
+                SENIOR: 300, // от 60 лет
+                FREE: 0 // до 6 лет
+            },
+            LIMITS: {
+                MAX_TICKETS: 6,
+                MAX_ORDERS_PER_EMAIL: 2,
+                MIN_AGE_INDEPENDENT: 14,
+                MIN_AGE_ADULT: 18
+            },
+            DISCOUNT: {
+                THRESHOLD: 4, // от 4 билетов
+                PERCENT: 10 // 10% скидка
+            }
+        };
+
+        // ==================== СОСТОЯНИЕ ПРИЛОЖЕНИЯ ====================
+        let state = {
+            selectedSeats: [],
+            viewers: [],
+            activeOrders: {}, // email -> count
+            occupiedSeats: generateOccupiedSeats()
+        };
+
+        // ==================== ГЕНЕРАЦИЯ ЗАНЯТЫХ МЕСТ ====================
+        function generateOccupiedSeats() {
+            const occupied = new Set();
+            const totalSeats = 80; // 10×8
+            // Случайным образом занимаем ~30% мест
+            for (let i = 0; i < totalSeats * 0.3; i++) {
+                occupied.add(Math.floor(Math.random() * totalSeats));
+            }
+            return occupied;
+        }
+
+        // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            initSeats();
+            initDate();
+            initEventListeners();
+            updateSummary();
+        });
+
+        function initSeats() {
+            const container = document.getElementById('seatsContainer');
+            container.innerHTML = '';
+
+            for (let row = 0; row < 8; row++) {
+                for (let col = 0; col < 10; col++) {
+                    const seatIndex = row * 10 + col;
+                    const seat = document.createElement('div');
+                    seat.className = 'seat';
+                    seat.textContent = `${String.fromCharCode(65 + row)}${col + 1}`;
+                    seat.dataset.index = seatIndex;
+
+                    if (state.occupiedSeats.has(seatIndex)) {
+                        seat.classList.add('occupied');
+                        seat.title = 'Место занято';
+                    } else {
+                        seat.onclick = () => toggleSeat(seatIndex);
+                    }
+
+                    container.appendChild(seat);
+                }
+            }
+        }
+
+        function initDate() {
+            const dateInput = document.getElementById('dateSelect');
+            const today = new Date();
+            dateInput.min = today.toISOString().split('T')[0];
+            dateInput.value = today.toISOString().split('T')[0];
+        }
+
+        function initEventListeners() {
+            document.getElementById('movieSelect').addEventListener('change', (e) => {
+                document.getElementById('cinemaSelect').disabled = !e.target.value;
+            });
+
+            document.getElementById('cinemaSelect').addEventListener('change', (e) => {
+                document.getElementById('hallSelect').disabled = !e.target.value;
+            });
+
+            document.getElementById('hallSelect').addEventListener('change', (e) => {
+                document.getElementById('dateSelect').disabled = !e.target.value;
+            });
+
+            document.getElementById('dateSelect').addEventListener('change', (e) => {
+                document.getElementById('timeSelect').disabled = !e.target.value;
+            });
+
+            // Добавляем первого зрителя по умолчанию
+            addViewer();
+        }
+
+        // ==================== ЛОГИКА ВЫБОРА МЕСТ ====================
+        function toggleSeat(seatIndex) {
+            const seat = document.querySelector(`.seat[data-index="${seatIndex}"]`);
+
+            if (seat.classList.contains('selected')) {
+                seat.classList.remove('selected');
+                state.selectedSeats = state.selectedSeats.filter(i => i !== seatIndex);
+            } else {
+                if (state.selectedSeats.length >= CONFIG.LIMITS.MAX_TICKETS) {
+                    showNotification('Максимум 6 билетов за одно бронирование!', 'error');
+                    return;
+                }
+                seat.classList.add('selected');
+                state.selectedSeats.push(seatIndex);
+            }
+
+            syncViewersWithSeats();
+            updateSummary();
+        }
+
+        function syncViewersWithSeats() {
+            const seatsCount = state.selectedSeats.length;
+            const viewersCount = state.viewers.length;
+
+            if (seatsCount > viewersCount) {
+                for (let i = viewersCount; i < seatsCount; i++) {
+                    addViewer(false);
+                }
+            } else if (seatsCount < viewersCount) {
+                state.viewers = state.viewers.slice(0, seatsCount);
+                renderViewers();
+            }
+        }
+
+        // ==================== ЛОГИКА ЗРИТЕЛЕЙ ====================
+        function addViewer(update = true) {
+            if (state.viewers.length >= CONFIG.LIMITS.MAX_TICKETS) {
+                showNotification('Максимум 6 зрителей!', 'error');
+                return;
+            }
+
+            state.viewers.push({
+                name: '',
+                age: '',
+                email: ''
+            });
+
+            if (update) {
+                renderViewers();
+                updateSummary();
+            }
+        }
+
+        function removeViewer(index) {
+            state.viewers.splice(index, 1);
+            renderViewers();
+            updateSummary();
+        }
+
+        function updateViewer(index, field, value) {
+            state.viewers[index][field] = value;
+            updateSummary();
+            validateBooking();
+        }
+
+        function renderViewers() {
+            const container = document.getElementById('viewersContainer');
+            container.innerHTML = '';
+
+            state.viewers.forEach((viewer, index) => {
+                        const row = document.createElement('div');
+                        row.className = 'viewer-row';
+                        row.innerHTML = `
+                    <input type="text" placeholder="ФИО зрителя ${index + 1}" 
+                           value="${viewer.name}" 
+                           onchange="updateViewer(${index}, 'name', this.value)">
+                    <input type="number" placeholder="Возраст" min="0" max="120"
+                           value="${viewer.age}" 
+                           onchange="updateViewer(${index}, 'age', this.value)">
+                    <input type="email" placeholder="Email" 
+                           value="${viewer.email}" 
+                           onchange="updateViewer(${index}, 'email', this.value)">
+                    ${state.viewers.length > 1 ? 
+                        `<button onclick="removeViewer(${index})" 
+                                 style="background: #e94560; color: white; border: none; 
+                                        border-radius: 5px; cursor: pointer;">✕</button>` 
+                        : ''}
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        // ==================== РАСЧЁТ СТОИМОСТИ ====================
+        function getTicketPrice(age) {
+            age = parseInt(age);
+            if (isNaN(age) || age < 0 || age > 120) return null;
+            if (age < 6) return CONFIG.PRICES.FREE;
+            if (age <= 11) return CONFIG.PRICES.CHILD;
+            if (age <= 25) return CONFIG.PRICES.STUDENT;
+            if (age <= 59) return CONFIG.PRICES.STANDARD;
+            return CONFIG.PRICES.SENIOR;
+        }
+
+        function getPriceCategory(age) {
+            age = parseInt(age);
+            if (isNaN(age)) return '';
+            if (age < 6) return '<span class="age-badge badge-child">Бесплатно</span>';
+            if (age <= 11) return '<span class="age-badge badge-child">Детский</span>';
+            if (age <= 25) return '<span class="age-badge badge-student">Студент</span>';
+            if (age <= 59) return '<span class="age-badge badge-adult">Стандарт</span>';
+            return '<span class="age-badge badge-senior">Пенсионный</span>';
+        }
+
+        function calculateTotal() {
+            let basePrice = 0;
+            let validViewers = 0;
+            
+            state.viewers.forEach(viewer => {
+                const price = getTicketPrice(viewer.age);
+                if (price !== null) {
+                    basePrice += price;
+                    validViewers++;
+                }
+            });
+            
+            const ticketCount = state.selectedSeats.length;
+            let discount = 0;
+            
+            if (ticketCount >= CONFIG.DISCOUNT.THRESHOLD) {
+                discount = basePrice * (CONFIG.DISCOUNT.PERCENT / 100);
+            }
+            
+            return {
+                basePrice,
+                discount,
+                total: basePrice - discount,
+                ticketCount,
+                validViewers
+            };
+        }
+
+        function updateSummary() {
+            const calc = calculateTotal();
+            
+            document.getElementById('selectedSeatsCount').textContent = calc.ticketCount;
+            document.getElementById('viewersCount').textContent = state.viewers.length;
+            document.getElementById('basePrice').textContent = `${calc.basePrice} ₽`;
+            document.getElementById('discount').textContent = `-${calc.discount.toFixed(0)} ₽`;
+            document.getElementById('totalPrice').textContent = `${calc.total.toFixed(0)} ₽`;
+            
+            validateBooking();
+        }
+
+        // ==================== ВАЛИДАЦИЯ БРОНИРОВАНИЯ ====================
+        function validateBooking() {
+            const confirmBtn = document.getElementById('confirmBtn');
+            const errors = [];
+            
+            // Проверка 1: Выбраны ли места
+            if (state.selectedSeats.length === 0) {
+                errors.push('Выберите хотя бы одно место');
+            }
+            
+            // Проверка 2: Заполнены ли данные зрителей
+            const incompleteViewers = state.viewers.filter(v => !v.name || !v.age || !v.email);
+            if (incompleteViewers.length > 0) {
+                errors.push('Заполните данные всех зрителей');
+            }
+            
+            // Проверка 3: Возраст и сопровождение
+            const hasMinor = state.viewers.some(v => parseInt(v.age) < CONFIG.LIMITS.MIN_AGE_INDEPENDENT);
+            const hasAdult = state.viewers.some(v => parseInt(v.age) >= CONFIG.LIMITS.MIN_AGE_ADULT);
+            
+            if (hasMinor && !hasAdult) {
+                errors.push('Дети до 14 лет требуют сопровождения взрослого (18+)');
+            }
+            
+            // Проверка 4: Лимит заказов на email
+            const emails = state.viewers.map(v => v.email).filter(e => e);
+            const emailCounts = {};
+            emails.forEach(email => {
+                emailCounts[email] = (emailCounts[email] || 0) + 1;
+            });
+            
+            for (const [email, count] of Object.entries(emailCounts)) {
+                const currentOrders = state.activeOrders[email] || 0;
+                if (currentOrders + count > CONFIG.LIMITS.MAX_ORDERS_PER_EMAIL) {
+                    errors.push(`На email ${email} превышен лимит заказов (макс 2)`);
+                }
+            }
+            
+            // Проверка 5: Лимит билетов
+            if (state.selectedSeats.length > CONFIG.LIMITS.MAX_TICKETS) {
+                errors.push('Максимум 6 билетов за одно бронирование');
+            }
+            
+            confirmBtn.disabled = errors.length > 0;
+            confirmBtn.textContent = errors.length > 0 ? 
+                `${errors[0]}` : 'Подтвердить бронирование';
+            
+            return errors.length === 0;
+        }
+
+        // ==================== ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ ====================
+        function confirmBooking() {
+            if (!validateBooking()) {
+                showNotification('Исправьте ошибки перед бронированием', 'error');
+                return;
+            }
+            
+            const calc = calculateTotal();
+            
+            // Обновляем счётчик заказов
+            state.viewers.forEach(viewer => {
+                if (viewer.email) {
+                    state.activeOrders[viewer.email] = (state.activeOrders[viewer.email] || 0) + 1;
+                }
+            });
+            
+            // Показываем успешное бронирование
+            showModal('success', 'Бронирование успешно!', `
+                <p>Билетов: ${calc.ticketCount}</p>
+                <p>Сумма: ${calc.total.toFixed(0)} ₽</p>
+                <p>Подтверждение отправлено на email</p>
+                <p style="margin-top: 15px; color: #aaa;">
+                    Места: ${state.selectedSeats.map(i => {
+                        const row = String.fromCharCode(65 + Math.floor(i / 10));
+                        const col = (i % 10) + 1;
+                        return `${row}${col}`;
+                    }).join(', ')}
+                </p>
+            `);
+            
+            // Помечаем места как занятые
+            state.selectedSeats.forEach(index => {
+                state.occupiedSeats.add(index);
+            });
+            
+            // Сбрасываем выбор
+            state.selectedSeats = [];
+            state.viewers = [{ name: '', age: '', email: '' }];
+            
+            initSeats();
+            renderViewers();
+            updateSummary();
+        }
+
+        // ==================== МОДАЛЬНОЕ ОКНО ====================
+        function showModal(type, title, message) {
+            const modal = document.getElementById('modal');
+            const icon = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            
+            icon.textContent = type === 'success' ? '✓' : '✕';
+            icon.className = type === 'success' ? 'success-icon' : 'error-icon';
+            modalTitle.textContent = title;
+            modalMessage.innerHTML = message;
+            
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // ==================== УВЕДОМЛЕНИЯ ====================
+        function showNotification(message, type) {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Закрытие модального окна по клику вне
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>

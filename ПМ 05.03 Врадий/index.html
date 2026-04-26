@@ -1,0 +1,1142 @@
+<!-- Объявляем тип документа HTML5 -->
+<!DOCTYPE html>
+
+<!-- Начало HTML-документа с указанием языка русский -->
+<html lang="ru">
+
+<!-- Секция заголовка документа (метаданные, стили, скрипты) -->
+
+<head>
+    <!-- Кодировка текста UTF-8 для поддержки кириллицы -->
+    <meta charset="UTF-8">
+
+    <!-- Настройка viewport для корректного отображения на мобильных устройствах -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Заголовок вкладки браузера -->
+    <title>Система бронирования билетов в кино</title>
+
+    <!-- Начало секции стилей CSS -->
+    <style>
+        /* Сброс всех отступов и рамок для всех элементов */
+        
+        * {
+            margin: 0;
+            /* Убираем внешние отступы */
+            padding: 0;
+            /* Убираем внутренние отступы */
+            box-sizing: border-box;
+            /* Включаем padding и border в общую ширину элемента */
+        }
+        /* Стили для всего тела документа */
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Шрифт всего документа */
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            /* Градиентный фон от тёмно-синего к ещё более тёмному */
+            min-height: 100vh;
+            /* Минимальная высота - 100% высоты viewport */
+            color: #fff;
+            /* Цвет текста белый */
+            padding: 20px;
+            /* Внутренний отступ 20px со всех сторон */
+        }
+        /* Контейнер для центрирования контента */
+        
+        .container {
+            max-width: 1200px;
+            /* Максимальная ширина контейнера */
+            margin: 0 auto;
+            /* Центрирование контейнера по горизонтали */
+        }
+        /* Стили для заголовка H1 */
+        
+        h1 {
+            text-align: center;
+            /* Выравнивание текста по центру */
+            margin-bottom: 30px;
+            /* Отступ снизу 30px */
+            color: #e94560;
+            /* Цвет текста красный */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            /* Тень текста для объёма */
+        }
+        /* Сетка для карточек шагов бронирования */
+        
+        .booking-steps {
+            display: grid;
+            /* Используем CSS Grid */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* Автоматические колонки минимум 300px */
+            gap: 20px;
+            /* Расстояние между элементами сетки */
+            margin-bottom: 30px;
+            /* Отступ снизу */
+        }
+        /* Стили для карточки каждого шага */
+        
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            /* Полупрозрачный белый фон */
+            border-radius: 15px;
+            /* Скруглённые углы 15px */
+            padding: 20px;
+            /* Внутренний отступ 20px */
+            backdrop-filter: blur(10px);
+            /* Эффект размытия фона */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            /* Полупрозрачная граница */
+        }
+        /* Заголовки H2 внутри карточек */
+        
+        .step-card h2 {
+            color: #e94560;
+            /* Красный цвет заголовка */
+            margin-bottom: 15px;
+            /* Отступ снизу */
+            font-size: 1.2em;
+            /* Размер шрифта 1.2em */
+        }
+        /* Стили для полей ввода и выпадающих списков */
+        
+        select,
+        input {
+            width: 100%;
+            /* Ширина 100% от родителя */
+            padding: 10px;
+            /* Внутренний отступ 10px */
+            margin-bottom: 10px;
+            /* Отступ снизу 10px */
+            border: none;
+            /* Убираем границу */
+            border-radius: 5px;
+            /* Скруглённые углы 5px */
+            background: rgba(255, 255, 255, 0.9);
+            /* Почти непрозрачный белый фон */
+            color: #333;
+            /* Тёмно-серый цвет текста */
+            font-size: 14px;
+            /* Размер шрифта 14px */
+        }
+        /* Экран кинотеатра (визуальный элемент) */
+        
+        .screen {
+            background: linear-gradient(180deg, #fff 0%, #ddd 100%);
+            /* Градиент от белого к серому */
+            height: 60px;
+            /* Высота 60px */
+            margin: 20px 0;
+            /* Отступы сверху и снизу 20px */
+            border-radius: 10px 10px 50% 50%;
+            /* Скругление только снизу для формы экрана */
+            display: flex;
+            /* Flexbox для центрирования */
+            align-items: center;
+            /* Центрирование по вертикали */
+            justify-content: center;
+            /* Центрирование по горизонтали */
+            color: #333;
+            /* Тёмно-серый текст */
+            font-weight: bold;
+            /* Жирный шрифт */
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+            /* Тень для эффекта свечения */
+        }
+        /* Контейнер для мест в зале */
+        
+        .seats-container {
+            display: grid;
+            /* CSS Grid для расположения мест */
+            grid-template-columns: repeat(10, 1fr);
+            /* 10 колонок одинаковой ширины */
+            gap: 8px;
+            /* Расстояние между местами 8px */
+            margin: 20px 0;
+            /* Отступы сверху и снизу */
+            padding: 20px;
+            /* Внутренний отступ 20px */
+            background: rgba(0, 0, 0, 0.3);
+            /* Полупрозрачный чёрный фон */
+            border-radius: 10px;
+            /* Скруглённые углы */
+        }
+        /* Отдельное место в зале */
+        
+        .seat {
+            width: 40px;
+            /* Ширина места 40px */
+            height: 40px;
+            /* Высота места 40px */
+            background: #444;
+            /* Серый фон для свободного места */
+            border-radius: 5px;
+            /* Скруглённые углы */
+            cursor: pointer;
+            /* Курсор-указатель при наведении */
+            transition: all 0.3s;
+            /* Плавная анимация всех свойств 0.3с */
+            display: flex;
+            /* Flexbox для центрирования текста */
+            align-items: center;
+            /* Центрирование по вертикали */
+            justify-content: center;
+            /* Центрирование по горизонтали */
+            font-size: 12px;
+            /* Размер шрифта номера места */
+            color: #fff;
+            /* Белый цвет текста */
+        }
+        /* Эффект при наведении на место */
+        
+        .seat:hover {
+            transform: scale(1.1);
+            /* Увеличение на 10% */
+            background: #666;
+            /* Более светлый серый фон */
+        }
+        /* Выбранное место */
+        
+        .seat.selected {
+            background: #e94560;
+            /* Красный фон */
+            box-shadow: 0 0 10px #e94560;
+            /* Красное свечение */
+        }
+        /* Занятое место */
+        
+        .seat.occupied {
+            background: #333;
+            /* Тёмно-серый фон */
+            cursor: not-allowed;
+            /* Курсор "запрещено" */
+            opacity: 0.5;
+            /* Полупрозрачность 50% */
+        }
+        /* Легенда для мест (объяснение цветов) */
+        
+        .seat.legend {
+            display: flex;
+            /* Flexbox для расположения элементов */
+            align-items: center;
+            /* Центрирование по вертикали */
+            gap: 10px;
+            /* Расстояние между элементами */
+            margin: 10px 0;
+            /* Отступы сверху и снизу */
+        }
+        /* Элемент легенды */
+        
+        .legend-item {
+            display: flex;
+            /* Flexbox */
+            align-items: center;
+            /* Центрирование по вертикали */
+            gap: 5px;
+            /* Расстояние между иконкой и текстом */
+            font-size: 12px;
+            /* Маленький шрифт */
+        }
+        /* Цветной квадратик в легенде */
+        
+        .legend-box {
+            width: 20px;
+            /* Ширина 20px */
+            height: 20px;
+            /* Высота 20px */
+            border-radius: 3px;
+            /* Скруглённые углы */
+        }
+        /* Форма для ввода данных зрителей */
+        
+        .viewer-form {
+            background: rgba(255, 255, 255, 0.1);
+            /* Полупрозрачный фон */
+            border-radius: 15px;
+            /* Скруглённые углы */
+            padding: 20px;
+            /* Внутренний отступ */
+            margin-top: 20px;
+            /* Отступ сверху */
+        }
+        /* Строка с данными одного зрителя */
+        
+        .viewer-row {
+            display: grid;
+            /* CSS Grid */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            /* Адаптивные колонки */
+            gap: 15px;
+            /* Расстояние между полями */
+            margin-bottom: 15px;
+            /* Отступ снизу */
+        }
+        /* Кнопка действия */
+        
+        .btn {
+            background: #e94560;
+            /* Красный фон */
+            color: white;
+            /* Белый текст */
+            border: none;
+            /* Без границы */
+            padding: 15px 30px;
+            /* Внутренние отступы */
+            border-radius: 5px;
+            /* Скруглённые углы */
+            cursor: pointer;
+            /* Курсор-указатель */
+            font-size: 16px;
+            /* Размер шрифта */
+            font-weight: bold;
+            /* Жирный шрифт */
+            transition: all 0.3s;
+            /* Плавная анимация */
+            width: 100%;
+            /* Ширина 100% */
+        }
+        /* Эффект при наведении на кнопку */
+        
+        .btn:hover {
+            background: #ff6b6b;
+            /* Более светлый красный */
+            transform: translateY(-2px);
+            /* Поднятие кнопки на 2px */
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
+            /* Тень */
+        }
+        /* Неактивная кнопка */
+        
+        .btn:disabled {
+            background: #666;
+            /* Серый фон */
+            cursor: not-allowed;
+            /* Курсор "запрещено" */
+            transform: none;
+            /* Без анимации */
+        }
+        /* Блок итоговой информации */
+        
+        .summary {
+            background: rgba(233, 69, 96, 0.2);
+            /* Полупрозрачный красный фон */
+            border-radius: 10px;
+            /* Скруглённые углы */
+            padding: 20px;
+            /* Внутренний отступ */
+            margin-top: 20px;
+            /* Отступ сверху */
+        }
+        /* Элемент итоговой информации */
+        
+        .summary-item {
+            display: flex;
+            /* Flexbox */
+            justify-content: space-between;
+            /* Распределение по краям */
+            margin-bottom: 10px;
+            /* Отступ снизу */
+            padding-bottom: 10px;
+            /* Внутренний отступ снизу */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            /* Разделительная линия */
+        }
+        /* Итоговая сумма (выделенная) */
+        
+        .total {
+            font-size: 1.5em;
+            /* Увеличенный шрифт */
+            font-weight: bold;
+            /* Жирный шрифт */
+            color: #e94560;
+            /* Красный цвет */
+        }
+        /* Модальное окно (скрыто по умолчанию) */
+        
+        .modal {
+            display: none;
+            /* Скрыто */
+            position: fixed;
+            /* Фиксированное позиционирование */
+            top: 0;
+            /* Прижато к верху */
+            left: 0;
+            /* Прижато к левому краю */
+            width: 100%;
+            /* Ширина 100% */
+            height: 100%;
+            /* Высота 100% */
+            background: rgba(0, 0, 0, 0.8);
+            /* Полупрозрачный чёрный фон */
+            z-index: 1000;
+            /* Поверх всех элементов */
+            align-items: center;
+            /* Центрирование по вертикали */
+            justify-content: center;
+            /* Центрирование по горизонтали */
+        }
+        /* Контент модального окна */
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            /* Градиентный фон */
+            padding: 40px;
+            /* Внутренний отступ */
+            border-radius: 20px;
+            /* Скруглённые углы */
+            max-width: 500px;
+            /* Максимальная ширина */
+            text-align: center;
+            /* Центрирование текста */
+            border: 2px solid #e94560;
+            /* Красная граница */
+        }
+        /* Заголовок модального окна */
+        
+        .modal h2 {
+            color: #e94560;
+            /* Красный цвет */
+            margin-bottom: 20px;
+            /* Отступ снизу */
+        }
+        /* Иконка успеха */
+        
+        .success-icon {
+            font-size: 60px;
+            /* Большой размер */
+            color: #4ade80;
+            /* Зелёный цвет */
+            margin-bottom: 20px;
+            /* Отступ снизу */
+        }
+        /* Иконка ошибки */
+        
+        .error-icon {
+            font-size: 60px;
+            /* Большой размер */
+            color: #e94560;
+            /* Красный цвет */
+            margin-bottom: 20px;
+            /* Отступ снизу */
+        }
+        /* Уведомление (всплывающее сообщение) */
+        
+        .notification {
+            position: fixed;
+            /* Фиксированное позиционирование */
+            top: 20px;
+            /* Отступ сверху 20px */
+            right: 20px;
+            /* Отступ справа 20px */
+            padding: 15px 25px;
+            /* Внутренние отступы */
+            border-radius: 5px;
+            /* Скруглённые углы */
+            color: white;
+            /* Белый текст */
+            font-weight: bold;
+            /* Жирный шрифт */
+            z-index: 1001;
+            /* Поверх модального окна */
+            animation: slideIn 0.3s ease;
+            /* Анимация появления */
+        }
+        /* Уведомление об успехе */
+        
+        .notification.success {
+            background: #4ade80;
+            /* Зелёный фон */
+        }
+        /* Уведомление об ошибке */
+        
+        .notification.error {
+            background: #e94560;
+            /* Красный фон */
+        }
+        /* Анимация появления уведомления */
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                /* Начало справа за экраном */
+                opacity: 0;
+                /* Прозрачное */
+            }
+            to {
+                transform: translateX(0);
+                /* Конец на месте */
+                opacity: 1;
+                /* Непрозрачное */
+            }
+        }
+        /* Бейдж возраста */
+        
+        .age-badge {
+            display: inline-block;
+            /* Строчно-блочный элемент */
+            padding: 3px 8px;
+            /* Внутренние отступы */
+            border-radius: 10px;
+            /* Скруглённые углы */
+            font-size: 11px;
+            /* Маленький шрифт */
+            margin-left: 5px;
+            /* Отступ слева */
+        }
+        /* Бейдж для ребёнка */
+        
+        .badge-child {
+            background: #4ade80;
+            color: #000;
+        }
+        /* Зелёный фон, чёрный текст */
+        /* Бейдж для студента */
+        
+        .badge-student {
+            background: #60a5fa;
+            color: #fff;
+        }
+        /* Синий фон, белый текст */
+        /* Бейдж для взрослого */
+        
+        .badge-adult {
+            background: #e94560;
+            color: #fff;
+        }
+        /* Красный фон, белый текст */
+        /* Бейдж для пенсионера */
+        
+        .badge-senior {
+            background: #fbbf24;
+            color: #000;
+        }
+        /* Жёлтый фон, чёрный текст */
+    </style>
+</head>
+
+<!-- Тело документа (видимая часть страницы) -->
+
+<body>
+    <!-- Главный контейнер для всего контента -->
+    <div class="container">
+        <!-- Заголовок страницы с эмодзи -->
+        <h1>🎬 Система бронирования билетов в кино</h1>
+
+        <!-- Секция с шагами бронирования (3 карточки в ряд) -->
+        <div class="booking-steps">
+            <!-- Шаг 1: Выбор фильма -->
+            <div class="step-card">
+                <h2>🎥 Шаг 1: Выбор фильма</h2>
+                <!-- Выпадающий список фильмов -->
+                <select id="movieSelect">
+                    <option value="">-- Выберите фильм --</option> <!-- Пустая опция по умолчанию -->
+                    <option value="avatar2">Аватар: Путь воды</option> <!-- Фильм 1 -->
+                    <option value="topgun">Топ Ган: Мэверик</option> <!-- Фильм 2 -->
+                    <option value="minions">Миньоны: Грювитация</option> <!-- Фильм 3 -->
+                    <option value="thor">Тор: Любовь и гром</option> <!-- Фильм 4 -->
+                    <option value="jurassic">Мир Юрского периода</option> <!-- Фильм 5 -->
+                </select>
+            </div>
+
+            <!-- Шаг 2: Выбор кинотеатра и зала -->
+            <div class="step-card">
+                <h2>🏢 Шаг 2: Кинотеатр и зал</h2>
+                <!-- Выпадающий список кинотеатров -->
+                <select id="cinemaSelect">
+                    <option value="">-- Выберите кинотеатр --</option> <!-- Пустая опция -->
+                    <option value="c1">Киномакс Плаза</option> <!-- Кинотеатр 1 -->
+                    <option value="c2">Каро Фильм</option> <!-- Кинотеатр 2 -->
+                    <option value="c3">Синема Парк</option> <!-- Кинотеатр 3 -->
+                </select>
+                <!-- Выпадающий список залов (изначально отключен) -->
+                <select id="hallSelect" disabled>
+                    <option value="">-- Выберите зал --</option> <!-- Пустая опция -->
+                    <option value="h1">Зал 1 (IMAX)</option> <!-- Зал 1 -->
+                    <option value="h2">Зал 2 (3D)</option> <!-- Зал 2 -->
+                    <option value="h3">Зал 3 (Стандарт)</option> <!-- Зал 3 -->
+                </select>
+            </div>
+
+            <!-- Шаг 3: Дата и время -->
+            <div class="step-card">
+                <h2>📅 Шаг 3: Дата и время</h2>
+                <!-- Поле выбора даты -->
+                <input type="date" id="dateSelect">
+                <!-- Выпадающий список времени (изначально отключен) -->
+                <select id="timeSelect" disabled>
+                    <option value="">-- Выберите время --</option> <!-- Пустая опция -->
+                    <option value="10:00">10:00</option> <!-- Сеанс 1 -->
+                    <option value="13:00">13:00</option> <!-- Сеанс 2 -->
+                    <option value="16:00">16:00</option> <!-- Сеанс 3 -->
+                    <option value="19:00">19:00</option> <!-- Сеанс 4 -->
+                    <option value="22:00">22:00</option> <!-- Сеанс 5 -->
+                </select>
+            </div>
+        </div>
+
+        <!-- Шаг 4: Выбор мест -->
+        <div class="step-card">
+            <h2>💺 Шаг 4: Выбор мест (10×8 = 80 мест)</h2>
+            <!-- Визуальное изображение экрана -->
+            <div class="screen">ЭКРАН</div>
+
+            <!-- Легенда для мест (объяснение цветов) -->
+            <div class="seat-legend">
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #444;"></div>
+                        <!-- Серый квадрат -->
+                        <span>Свободно</span>
+                        <!-- Текст пояснения -->
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #e94560;"></div>
+                        <!-- Красный квадрат -->
+                        <span>Выбрано</span>
+                        <!-- Текст пояснения -->
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-box" style="background: #333;"></div>
+                        <!-- Тёмный квадрат -->
+                        <span>Занято</span>
+                        <!-- Текст пояснения -->
+                    </div>
+                </div>
+                <!-- Предупреждение о лимите билетов -->
+                <p style="margin-top: 10px; color: #aaa;">Максимум 6 билетов за одно бронирование</p>
+            </div>
+
+            <!-- Контейнер для мест (заполняется JavaScript) -->
+            <div class="seats-container" id="seatsContainer"></div>
+        </div>
+
+        <!-- Шаг 5: Данные зрителей -->
+        <div class="viewer-form">
+            <h2>👥 Шаг 5: Данные зрителей</h2>
+            <!-- Предупреждения о правилах системы -->
+            <p style="color: #aaa; margin-bottom: 15px;">
+                ⚠️ Дети до 14 лет требуют сопровождения взрослого (18+)<br>
+                <!-- Правило 1 -->
+                ⚠️ Дети до 6 лет — бесплатно (но место занимают)
+                <!-- Правило 2 -->
+            </p>
+            <!-- Контейнер для форм зрителей (заполняется JavaScript) -->
+            <div id="viewersContainer"></div>
+            <!-- Кнопка добавления нового зрителя -->
+            <button class="btn" onclick="addViewer()" style="background: #4ade80; margin-top: 10px;">
+                + Добавить зрителя
+            </button>
+        </div>
+
+        <!-- Итоговая информация о заказе -->
+        <div class="summary">
+            <h2>📊 Итоговая информация</h2>
+            <!-- Строка: количество выбранных мест -->
+            <div class="summary-item">
+                <span>Выбрано мест:</span>
+                <!-- Текст метки -->
+                <span id="selectedSeatsCount">0</span>
+                <!-- Динамическое значение -->
+            </div>
+            <!-- Строка: количество зрителей -->
+            <div class="summary-item">
+                <span>Зрителей:</span>
+                <!-- Текст метки -->
+                <span id="viewersCount">0</span>
+                <!-- Динамическое значение -->
+            </div>
+            <!-- Строка: базовая стоимость -->
+            <div class="summary-item">
+                <span>Стоимость билетов:</span>
+                <!-- Текст метки -->
+                <span id="basePrice">0 ₽</span>
+                <!-- Динамическое значение -->
+            </div>
+            <!-- Строка: размер скидки -->
+            <div class="summary-item">
+                <span>Скидка (от 4 билетов):</span>
+                <!-- Текст метки -->
+                <span id="discount">0 ₽</span>
+                <!-- Динамическое значение -->
+            </div>
+            <!-- Строка: итоговая сумма (выделенная) -->
+            <div class="summary-item total">
+                <span>Итого к оплате:</span>
+                <!-- Текст метки -->
+                <span id="totalPrice">0 ₽</span>
+                <!-- Динамическое значение -->
+            </div>
+        </div>
+
+        <!-- Кнопка подтверждения бронирования (изначально отключена) -->
+        <button class="btn" onclick="confirmBooking()" id="confirmBtn" disabled style="margin-top: 20px;">
+            ✅ Подтвердить бронирование
+        </button>
+    </div>
+
+    <!-- Модальное окно для сообщений (скрыто по умолчанию) -->
+    <div class="modal" id="modal">
+        <!-- Контент модального окна -->
+        <div class="modal-content">
+            <!-- Иконка статуса (успех/ошибка) -->
+            <div class="success-icon" id="modalIcon">✓</div>
+            <!-- Заголовок сообщения -->
+            <h2 id="modalTitle">Бронирование успешно!</h2>
+            <!-- Текст сообщения -->
+            <p id="modalMessage"></p>
+            <!-- Кнопка закрытия -->
+            <button class="btn" onclick="closeModal()" style="margin-top: 20px;">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Секция JavaScript кода -->
+    <script>
+        // ==================== КОНФИГУРАЦИЯ СИСТЕМЫ ====================
+
+        // Объект с настройками системы
+        const CONFIG = {
+            // Цены на билеты по категориям
+            PRICES: {
+                CHILD: 250, // до 12 лет - 250 рублей
+                STUDENT: 300, // 12-25 лет - 300 рублей
+                STANDARD: 400, // 26-59 лет - 400 рублей
+                SENIOR: 300, // от 60 лет - 300 рублей
+                FREE: 0 // до 6 лет - бесплатно
+            },
+            // Ограничения системы
+            LIMITS: {
+                MAX_TICKETS: 6, // Максимум 6 билетов за заказ
+                MAX_ORDERS_PER_EMAIL: 2, // Максимум 2 заказа на email
+                MIN_AGE_INDEPENDENT: 14, // Минимальный возраст для самостоятельного посещения
+                MIN_AGE_ADULT: 18 // Минимальный возраст взрослого
+            },
+            // Параметры скидки
+            DISCOUNT: {
+                THRESHOLD: 4, // Скидка применяется от 4 билетов
+                PERCENT: 10 // Размер скидки 10%
+            }
+        };
+
+        // ==================== СОСТОЯНИЕ ПРИЛОЖЕНИЯ ====================
+
+        // Объект для хранения текущего состояния приложения
+        let state = {
+            selectedSeats: [], // Массив индексов выбранных мест
+            viewers: [], // Массив объектов с данными зрителей
+            activeOrders: {}, // Объект: email -> количество активных заказов
+            occupiedSeats: generateOccupiedSeats() // Множество занятых мест (генерируется функцией)
+        };
+
+        // ==================== ГЕНЕРАЦИЯ ЗАНЯТЫХ МЕСТ ====================
+
+        // Функция генерации случайно занятых мест для реалистичности
+        function generateOccupiedSeats() {
+            const occupied = new Set(); // Создаём множество для хранения занятых мест
+            const totalSeats = 80; // Общее количество мест (10×8)
+
+            // Заполняем ~30% мест случайными значениями
+            for (let i = 0; i < totalSeats * 0.3; i++) {
+                occupied.add(Math.floor(Math.random() * totalSeats)); // Добавляем случайный индекс 0-79
+            }
+
+            return occupied; // Возвращаем множество занятых мест
+        }
+
+        // ==================== ИНИЦИАЛИЗАЦИЯ ====================
+
+        // Событие: документ полностью загружен
+        document.addEventListener('DOMContentLoaded', () => {
+            initSeats(); // Инициализируем схему мест
+            initDate(); // Инициализируем поле даты
+            initEventListeners(); // Добавляем обработчики событий
+            updateSummary(); // Обновляем итоговую информацию
+        });
+
+        // Функция инициализации схемы мест
+        function initSeats() {
+            const container = document.getElementById('seatsContainer'); // Получаем контейнер мест
+            container.innerHTML = ''; // Очищаем контейнер
+
+            // Цикл по рядам (8 рядов)
+            for (let row = 0; row < 8; row++) {
+                // Цикл по колонкам (10 колонок)
+                for (let col = 0; col < 10; col++) {
+                    const seatIndex = row * 10 + col; // Вычисляем индекс места (0-79)
+                    const seat = document.createElement('div'); // Создаём div элемент
+                    seat.className = 'seat'; // Добавляем класс seat
+                    seat.textContent = `${String.fromCharCode(65 + row)}${col + 1}`; // Номер места (A1, A2, ... H10)
+                    seat.dataset.index = seatIndex; // Сохраняем индекс в data-атрибуте
+
+                    // Проверяем, занято ли место
+                    if (state.occupiedSeats.has(seatIndex)) {
+                        seat.classList.add('occupied'); // Добавляем класс occupied
+                        seat.title = 'Место занято'; // Добавляем подсказку
+                    } else {
+                        seat.onclick = () => toggleSeat(seatIndex); // Добавляем обработчик клика
+                    }
+
+                    container.appendChild(seat); // Добавляем место в контейнер
+                }
+            }
+        }
+
+        // Функция инициализации поля даты
+        function initDate() {
+            const dateInput = document.getElementById('dateSelect'); // Получаем поле даты
+            const today = new Date(); // Получаем текущую дату
+            dateInput.min = today.toISOString().split('T')[0]; // Устанавливаем минимальную дату (сегодня)
+            dateInput.value = today.toISOString().split('T')[0]; // Устанавливаем значение (сегодня)
+        }
+
+        // Функция инициализации обработчиков событий
+        function initEventListeners() {
+            // Обработчик выбора фильма
+            document.getElementById('movieSelect').addEventListener('change', (e) => {
+                document.getElementById('cinemaSelect').disabled = !e.target.value; // Активируем выбор кинотеатра
+            });
+
+            // Обработчик выбора кинотеатра
+            document.getElementById('cinemaSelect').addEventListener('change', (e) => {
+                document.getElementById('hallSelect').disabled = !e.target.value; // Активируем выбор зала
+            });
+
+            // Обработчик выбора зала
+            document.getElementById('hallSelect').addEventListener('change', (e) => {
+                document.getElementById('dateSelect').disabled = !e.target.value; // Активируем выбор даты
+            });
+
+            // Обработчик выбора даты
+            document.getElementById('dateSelect').addEventListener('change', (e) => {
+                document.getElementById('timeSelect').disabled = !e.target.value; // Активируем выбор времени
+            });
+
+            // Добавляем первого зрителя по умолчанию
+            addViewer();
+        }
+
+        // ==================== ЛОГИКА ВЫБОРА МЕСТ ====================
+
+        // Функция переключения состояния места
+        function toggleSeat(seatIndex) {
+            const seat = document.querySelector(`.seat[data-index="${seatIndex}"]`); // Находим элемент места
+
+            // Если место уже выбрано
+            if (seat.classList.contains('selected')) {
+                seat.classList.remove('selected'); // Убираем класс selected
+                state.selectedSeats = state.selectedSeats.filter(i => i !== seatIndex); // Удаляем из массива
+            } else {
+                // Если место не выбрано
+                if (state.selectedSeats.length >= CONFIG.LIMITS.MAX_TICKETS) { // Проверяем лимит
+                    showNotification('Максимум 6 билетов за одно бронирование!', 'error'); // Показываем ошибку
+                    return; // Прерываем функцию
+                }
+                seat.classList.add('selected'); // Добавляем класс selected
+                state.selectedSeats.push(seatIndex); // Добавляем индекс в массив
+            }
+
+            syncViewersWithSeats(); // Синхронизируем количество зрителей с местами
+            updateSummary(); // Обновляем итоговую информацию
+        }
+
+        // Функция синхронизации зрителей с выбранными местами
+        function syncViewersWithSeats() {
+            const seatsCount = state.selectedSeats.length; // Количество выбранных мест
+            const viewersCount = state.viewers.length; // Количество зрителей
+
+            // Если мест больше чем зрителей
+            if (seatsCount > viewersCount) {
+                // Добавляем недостающих зрителей
+                for (let i = viewersCount; i < seatsCount; i++) {
+                    addViewer(false); // Добавляем без обновления интерфейса
+                }
+            } else if (seatsCount < viewersCount) {
+                // Если зрителей больше чем мест
+                state.viewers = state.viewers.slice(0, seatsCount); // Обрезаем массив зрителей
+                renderViewers(); // Перерисовываем формы
+            }
+        }
+
+        // ==================== ЛОГИКА ЗРИТЕЛЕЙ ====================
+
+        // Функция добавления зрителя
+        function addViewer(update = true) {
+            // Проверяем лимит зрителей
+            if (state.viewers.length >= CONFIG.LIMITS.MAX_TICKETS) {
+                showNotification('Максимум 6 зрителей!', 'error'); // Показываем ошибку
+                return; // Прерываем функцию
+            }
+
+            // Добавляем нового зрителя в массив
+            state.viewers.push({
+                name: '', // Пустое имя
+                age: '', // Пустой возраст
+                email: '' // Пустой email
+            });
+
+            // Если нужно обновить интерфейс
+            if (update) {
+                renderViewers(); // Перерисовываем формы
+                updateSummary(); // Обновляем итоговую информацию
+            }
+        }
+
+        // Функция удаления зрителя
+        function removeViewer(index) {
+            state.viewers.splice(index, 1); // Удаляем зрителя по индексу
+            renderViewers(); // Перерисовываем формы
+            updateSummary(); // Обновляем итоговую информацию
+        }
+
+        // Функция обновления данных зрителя
+        function updateViewer(index, field, value) {
+            state.viewers[index][field] = value; // Обновляем поле зрителя
+            updateSummary(); // Обновляем итоговую информацию
+            validateBooking(); // Проверяем возможность бронирования
+        }
+
+        // Функция отрисовки форм зрителей
+        function renderViewers() {
+            const container = document.getElementById('viewersContainer'); // Получаем контейнер
+            container.innerHTML = ''; // Очищаем контейнер
+
+            // Проходим по всем зрителям
+            state.viewers.forEach((viewer, index) => {
+                        const row = document.createElement('div'); // Создаём div для строки
+                        row.className = 'viewer-row'; // Добавляем класс
+                        row.innerHTML = `
+                    <input type="text" placeholder="ФИО зрителя ${index + 1}" 
+                           value="${viewer.name}" 
+                           onchange="updateViewer(${index}, 'name', this.value)">
+                    <input type="number" placeholder="Возраст" min="0" max="120"
+                           value="${viewer.age}" 
+                           onchange="updateViewer(${index}, 'age', this.value)">
+                    <input type="email" placeholder="Email" 
+                           value="${viewer.email}" 
+                           onchange="updateViewer(${index}, 'email', this.value)">
+                    ${state.viewers.length > 1 ? 
+                        `<button onclick="removeViewer(${index})" 
+                                 style="background: #e94560; color: white; border: none; 
+                                        border-radius: 5px; cursor: pointer;">✕</button>` 
+                        : ''}
+                `;
+                container.appendChild(row);  // Добавляем строку в контейнер
+            });
+        }
+
+        // ==================== РАСЧЁТ СТОИМОСТИ ====================
+        
+        // Функция получения цены билета по возрасту
+        function getTicketPrice(age) {
+            age = parseInt(age);  // Преобразуем возраст в число
+            if (isNaN(age) || age < 0 || age > 120) return null;  // Проверяем корректность
+            if (age < 6) return CONFIG.PRICES.FREE;  // До 6 лет - бесплатно
+            if (age <= 11) return CONFIG.PRICES.CHILD;  // 6-11 лет - детский
+            if (age <= 25) return CONFIG.PRICES.STUDENT;  // 12-25 лет - студенческий
+            if (age <= 59) return CONFIG.PRICES.STANDARD;  // 26-59 лет - стандартный
+            return CONFIG.PRICES.SENIOR;  // 60+ лет - пенсионный
+        }
+
+        // Функция получения категории цены для отображения
+        function getPriceCategory(age) {
+            age = parseInt(age);  // Преобразуем возраст в число
+            if (isNaN(age)) return '';  // Если не число - пустая строка
+            if (age < 6) return '<span class="age-badge badge-child">Бесплатно</span>';  // Бейдж бесплатно
+            if (age <= 11) return '<span class="age-badge badge-child">Детский</span>';  // Бейдж детский
+            if (age <= 25) return '<span class="age-badge badge-student">Студент</span>';  // Бейдж студент
+            if (age <= 59) return '<span class="age-badge badge-adult">Стандарт</span>';  // Бейдж стандарт
+            return '<span class="age-badge badge-senior">Пенсионный</span>';  // Бейдж пенсионный
+        }
+
+        // Функция расчёта общей стоимости
+        function calculateTotal() {
+            let basePrice = 0;  // Инициализируем базовую цену
+            let validViewers = 0;  // Инициализируем счётчик валидных зрителей
+            
+            // Проходим по всем зрителям
+            state.viewers.forEach(viewer => {
+                const price = getTicketPrice(viewer.age);  // Получаем цену билета
+                if (price !== null) {  // Если цена корректна
+                    basePrice += price;  // Добавляем к общей сумме
+                    validViewers++;  // Увеличиваем счётчик
+                }
+            });
+            
+            const ticketCount = state.selectedSeats.length;  // Получаем количество билетов
+            let discount = 0;  // Инициализируем скидку
+            
+            // Проверяем право на скидку
+            if (ticketCount >= CONFIG.DISCOUNT.THRESHOLD) {
+                discount = basePrice * (CONFIG.DISCOUNT.PERCENT / 100);  // Рассчитываем 10% скидку
+            }
+            
+            // Возвращаем объект с расчётами
+            return {
+                basePrice,           // Базовая цена
+                discount,            // Размер скидки
+                total: basePrice - discount,  // Итоговая цена
+                ticketCount,         // Количество билетов
+                validViewers         // Количество валидных зрителей
+            };
+        }
+
+        // Функция обновления итоговой информации
+        function updateSummary() {
+            const calc = calculateTotal();  // Получаем расчёты
+            
+            document.getElementById('selectedSeatsCount').textContent = calc.ticketCount;  // Обновляем счётчик мест
+            document.getElementById('viewersCount').textContent = state.viewers.length;  // Обновляем счётчик зрителей
+            document.getElementById('basePrice').textContent = `${calc.basePrice} ₽`;  // Обновляем базовую цену
+            document.getElementById('discount').textContent = `-${calc.discount.toFixed(0)} ₽`;  // Обновляем скидку
+            document.getElementById('totalPrice').textContent = `${calc.total.toFixed(0)} ₽`;  // Обновляем итоговую цену
+            
+            validateBooking();  // Проверяем возможность бронирования
+        }
+
+        // ==================== ВАЛИДАЦИЯ БРОНИРОВАНИЯ ====================
+        
+        // Функция проверки возможности бронирования
+        function validateBooking() {
+            const confirmBtn = document.getElementById('confirmBtn');  // Получаем кнопку подтверждения
+            const errors = [];  // Массив ошибок
+            
+            // Проверка 1: Выбраны ли места
+            if (state.selectedSeats.length === 0) {
+                errors.push('Выберите хотя бы одно место');  // Добавляем ошибку
+            }
+            
+            // Проверка 2: Заполнены ли данные зрителей
+            const incompleteViewers = state.viewers.filter(v => !v.name || !v.age || !v.email);  // Фильтруем незаполненных
+            if (incompleteViewers.length > 0) {
+                errors.push('Заполните данные всех зрителей');  // Добавляем ошибку
+            }
+            
+            // Проверка 3: Возраст и сопровождение
+            const hasMinor = state.viewers.some(v => parseInt(v.age) < CONFIG.LIMITS.MIN_AGE_INDEPENDENT);  // Есть ли дети <14
+            const hasAdult = state.viewers.some(v => parseInt(v.age) >= CONFIG.LIMITS.MIN_AGE_ADULT);  // Есть ли взрослые 18+
+            
+            if (hasMinor && !hasAdult) {  // Если есть дети без взрослых
+                errors.push('Дети до 14 лет требуют сопровождения взрослого (18+)');  // Добавляем ошибку
+            }
+            
+            // Проверка 4: Лимит заказов на email
+            const emails = state.viewers.map(v => v.email).filter(e => e);  // Получаем все email
+            const emailCounts = {};  // Объект для подсчёта
+            
+            emails.forEach(email => {
+                emailCounts[email] = (emailCounts[email] || 0) + 1;  // Считаем количество на каждый email
+            });
+            
+            for (const [email, count] of Object.entries(emailCounts)) {  // Проходим по email
+                const currentOrders = state.activeOrders[email] || 0;  // Получаем текущие заказы
+                if (currentOrders + count > CONFIG.LIMITS.MAX_ORDERS_PER_EMAIL) {  // Проверяем лимит
+                    errors.push(`На email ${email} превышен лимит заказов (макс 2)`);  // Добавляем ошибку
+                }
+            }
+            
+            // Проверка 5: Лимит билетов
+            if (state.selectedSeats.length > CONFIG.LIMITS.MAX_TICKETS) {
+                errors.push('Максимум 6 билетов за одно бронирование');  // Добавляем ошибку
+            }
+            
+            confirmBtn.disabled = errors.length > 0;  // Блокируем кнопку если есть ошибки
+            confirmBtn.textContent = errors.length > 0 ? 
+                `⚠️ ${errors[0]}` : '✅ Подтвердить бронирование';  // Меняем текст кнопки
+            
+            return errors.length === 0;  // Возвращаем true если нет ошибок
+        }
+
+        // ==================== ПОДТВЕРЖДЕНИЕ БРОНИРОВАНИЯ ====================
+        
+        // Функция подтверждения бронирования
+        function confirmBooking() {
+            // Проверяем валидность
+            if (!validateBooking()) {
+                showNotification('Исправьте ошибки перед бронированием', 'error');  // Показываем ошибку
+                return;  // Прерываем функцию
+            }
+            
+            const calc = calculateTotal();  // Получаем расчёты
+            
+            // Обновляем счётчик заказов для каждого email
+            state.viewers.forEach(viewer => {
+                if (viewer.email) {  // Если email заполнен
+                    state.activeOrders[viewer.email] = (state.activeOrders[viewer.email] || 0) + 1;  // Увеличиваем счётчик
+                }
+            });
+            
+            // Показываем успешное бронирование
+            showModal('success', 'Бронирование успешно!', `
+                <p>🎫 Билетов: ${calc.ticketCount}</p>  // Количество билетов
+                <p>💰 Сумма: ${calc.total.toFixed(0)} ₽</p>  // Итоговая сумма
+                <p>📧 Подтверждение отправлено на email</p>  // Сообщение об отправке
+                <p style="margin-top: 15px; color: #aaa;">
+                    Места: ${state.selectedSeats.map(i => {
+                        const row = String.fromCharCode(65 + Math.floor(i / 10));  // Вычисляем букву ряда
+                        const col = (i % 10) + 1;  // Вычисляем номер места
+                        return `${row}${col}`;  // Формируем обозначение места
+                    }).join(', ')}
+                </p>
+            `);
+            
+            // Помечаем места как занятые
+            state.selectedSeats.forEach(index => {
+                state.occupiedSeats.add(index);  // Добавляем в множество занятых
+            });
+            
+            // Сбрасываем выбор
+            state.selectedSeats = [];  // Очищаем выбранные места
+            state.viewers = [{ name: '', age: '', email: '' }];  // Сбрасываем зрителей к одному
+            
+            initSeats();  // Перерисовываем схему мест
+            renderViewers();  // Перерисовываем формы зрителей
+            updateSummary();  // Обновляем итоговую информацию
+        }
+
+        // ==================== МОДАЛЬНОЕ ОКНО ====================
+        
+        // Функция показа модального окна
+        function showModal(type, title, message) {
+            const modal = document.getElementById('modal');  // Получаем модальное окно
+            const icon = document.getElementById('modalIcon');  // Получаем иконку
+            const modalTitle = document.getElementById('modalTitle');  // Получаем заголовок
+            const modalMessage = document.getElementById('modalMessage');  // Получаем сообщение
+            
+            icon.textContent = type === 'success' ? '✓' : '✕';  // Устанавливаем иконку
+            icon.className = type === 'success' ? 'success-icon' : 'error-icon';  // Устанавливаем класс
+            modalTitle.textContent = title;  // Устанавливаем заголовок
+            modalMessage.innerHTML = message;  // Устанавливаем сообщение
+            
+            modal.style.display = 'flex';  // Показываем модальное окно
+        }
+
+        // Функция закрытия модального окна
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';  // Скрываем модальное окно
+        }
+
+        // ==================== УВЕДОМЛЕНИЯ ====================
+        
+        // Функция показа уведомления
+        function showNotification(message, type) {
+            const notification = document.createElement('div');  // Создаём div элемент
+            notification.className = `notification ${type}`;  // Добавляем классы
+            notification.textContent = message;  // Устанавливаем текст
+            document.body.appendChild(notification);  // Добавляем в body
+            
+            setTimeout(() => {
+                notification.remove();  // Удаляем через 3 секунды
+            }, 3000);
+        }
+
+        // Закрытие модального окна по клику вне контента
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {  // Если кликнули на фон
+                closeModal();  // Закрываем окно
+            }
+        });
+    </script>
+</body>
+
+<!-- Конец HTML-документа -->
+
+</html>
